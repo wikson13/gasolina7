@@ -16,6 +16,17 @@ export const addUser = ({firstName, lastName, id}) => {
   });
 };
 
+export const addRefuelling = ({firstName, lastName, id}) => {
+  return axios.put(
+    `https://gasolina-native.firebaseio.com/refuellings/${id}.json`,
+    {
+      firstName: firstName,
+      lastName: lastName,
+      id: id,
+    },
+  );
+};
+
 export const deleteUser = userId => {
   return axios.delete(
     `https://gasolina-native.firebaseio.com/users/${userId}.json`,
