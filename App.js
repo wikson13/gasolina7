@@ -21,6 +21,7 @@ import Fuel from './screens/Fuel';
 import AppNavigation from './navigation/AppNavigation';
 import TabNavigation from './components/TabNavigation';
 import TopBar from './components/TopBar';
+
 const App: () => React$Node = props => {
   const dispatch = useDispatch();
   const counter = useSelector(state => state.counter.counter);

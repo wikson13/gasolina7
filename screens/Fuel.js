@@ -8,13 +8,12 @@ import {
 } from 'react-native';
 import ButtonClassic from '../components/ButtonClassic';
 import RefuellingItem from '../components/RefuellingItem';
-
 const Fuel = props => {
   return (
     <View style={styles.container}>
       <ButtonClassic
         title="Dodaj tankowanie"
-        onPress={() => console.log(props)}
+        onPress={() => props.navigation.navigate('AddRefuelling')}
       />
       <View>
         <RefuellingItem
