@@ -1,10 +1,21 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 const InputField = props => {
   return (
     <View style={styles.fieldContainer}>
       <Text style={styles.title}>{props.title}</Text>
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        value={props.value}
+        onChangeText={props.onChangeText}
+        keyboardType={props.keyboardType}
+      />
     </View>
   );
 };

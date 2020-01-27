@@ -3,10 +3,12 @@ import {View, Button, Text, TextInput, Switch} from 'react-native';
 import InputField from '../components/InputField';
 import ButtonClassic from '../components/ButtonClassic';
 import DateTimePicker from '@react-native-community/datetimepicker';
-const AddRefuelling = () => {
+
+const AddService = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [mileage, setMileage] = useState('');
   const [date, setDate] = useState('');
-  const [liters, setLiters] = useState('');
   const [priceLiter, setPriceLiter] = useState('');
   const [amount, setAmount] = useState('');
 
@@ -21,6 +23,18 @@ const AddRefuelling = () => {
   return (
     <View>
       <InputField
+        title="Tytuł"
+        value={title}
+        onChangeText={text => setTitle(text)}
+        keyboardType="default"
+      />
+      <InputField
+        title="Opis"
+        value={description}
+        onChangeText={text => setDescription(text)}
+        keyboardType="default"
+      />
+      <InputField
         title="Przebieg"
         value={mileage}
         onChangeText={text => setMileage(text)}
@@ -30,17 +44,6 @@ const AddRefuelling = () => {
         title="Data"
         value={date}
         onChangeText={text => setDate(text)}
-      />
-      <InputField
-        title="Zatankowano"
-        value={liters}
-        onChangeText={text => setLiters(text)}
-        keyboardType="number-pad"
-      />
-      <InputField
-        title="Cena za litr"
-        value={priceLiter}
-        onChangeText={text => setLiter(text)}
         keyboardType="number-pad"
       />
       <InputField
@@ -51,7 +54,7 @@ const AddRefuelling = () => {
       />
       {/*<Text>Tankowanie do pełna</Text>*/}
       {/*<Switch />*/}
-      <ButtonClassic title="Dodaj tankowanie" />
+      <ButtonClassic title="Dodaj serwis" />
       <Button title="date" onPress={() => setShowDatepicker(true)} />
       {showDatepicker && (
         <DateTimePicker
@@ -66,4 +69,4 @@ const AddRefuelling = () => {
   );
 };
 
-export default AddRefuelling;
+export default AddService;
