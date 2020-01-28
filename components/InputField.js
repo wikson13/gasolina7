@@ -16,7 +16,7 @@ const InputField = props => {
         onChangeText={props.onChangeText}
         keyboardType={props.keyboardType}
       />
-      <Text style={styles.errorMsg}>To pole jest wymagane</Text>
+      {props.errorMsg && <Text style={styles.errorMsg}>{props.errorMsg}</Text>}
     </View>
   );
 };

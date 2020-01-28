@@ -20,6 +20,9 @@ const AddRefuelling = props => {
   const [priceLiter, setPriceLiter] = useState('');
   const [amount, setAmount] = useState('');
   const [showDatepicker, setShowDatepicker] = useState(false);
+
+  const [mileageErr, setMileageErr] = useState(null);
+
   const dispatch = useDispatch();
   const dateChangeHandler = (event, date) => {
     console.log(date);
@@ -44,6 +47,17 @@ const AddRefuelling = props => {
     props.navigation.navigate('Fuel');
   };
 
+  const mileageInputHandler = text => {
+    if (text.trim().length <= 0) {
+      setMileageErr('To pole jest wymagane');
+    } else if (!/^\d+$/.test(text)) {
+      setMileageErr('Tylko liczby');
+    } else {
+      setMileageErr(null);
+    }
+    setMileage(text);
+  };
+
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={15}
@@ -53,13 +67,15 @@ const AddRefuelling = props => {
         <InputField
           title="Przebieg"
           value={mileage}
-          onChangeText={text => setMileage(text)}
+          onChangeText={text => mileageInputHandler(text)}
           keyboardType="number-pad"
+          errorMsg={mileageErr}
         />
         <InputField
           title="Data"
           value={date}
           onChangeText={text => setDate(text)}
+          errorMsg="ee"
         />
         <InputField
           title="Zatankowano"
