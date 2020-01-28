@@ -23,8 +23,11 @@ function* watchGetDataRequest() {
 function* addRefuelling(action) {
   try {
     yield call(api.addRefuelling, {
-      firstName: action.payload.firstName,
-      lastName: action.payload.lastName,
+      mileage: action.payload.mileage,
+      date: action.payload.date,
+      liters: action.payload.liters,
+      priceLiter: action.payload.priceLiter,
+      amount: action.payload.amount,
       id: action.payload.id,
     });
     // yield call(getUsers);
@@ -34,13 +37,13 @@ function* addRefuelling(action) {
 }
 
 function* watchAddRefuelling() {
-  yield takeLatest(actions.ADD_REFUELLING_REQUEST, addRefuelling);
+  yield takeEvery(actions.ADD_REFUELLING_REQUEST, addRefuelling);
 }
 
-const userSagas = [
+const dataSagas = [
   fork(watchGetDataRequest),
   fork(watchAddRefuelling),
   // fork(watchDeleteUserRequest),
 ];
 
-export default userSagas;
+export default dataSagas;

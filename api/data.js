@@ -16,13 +16,22 @@ export const addUser = ({firstName, lastName, id}) => {
   });
 };
 
-export const addRefuelling = ({firstName, lastName, id}) => {
+export const addRefuelling = ({
+  mileage,
+  date,
+  liters,
+  priceLiter,
+  amount,
+  id,
+}) => {
   return axios.put(
     `https://gasolina-native.firebaseio.com/refuellings/${id}.json`,
     {
-      firstName: firstName,
-      lastName: lastName,
-      id: id,
+      mileage,
+      date,
+      liters,
+      priceLiter,
+      amount,
     },
   );
 };

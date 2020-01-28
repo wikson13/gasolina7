@@ -16,6 +16,7 @@ const InputField = props => {
         onChangeText={props.onChangeText}
         keyboardType={props.keyboardType}
       />
+      <Text style={styles.errorMsg}>To pole jest wymagane</Text>
     </View>
   );
 };
@@ -31,6 +32,11 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {
     margin: 10,
+  },
+  errorMsg: {
+    color: 'red',
+    textAlign: 'center',
+    fontSize: 12,
   },
 });
 

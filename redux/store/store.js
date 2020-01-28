@@ -3,26 +3,20 @@ import {counterReducer} from '../counter/counterReducer';
 import {createStore, applyMiddleware, compose} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import dataReducer from '../data/dataReducer';
+
 const reducers = combineReducers({
   counter: counterReducer,
+  data: dataReducer,
 });
 
-// const composeEnhancers =
-//   (process.env.NODE_ENV === 'development'
-//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-//     : null) || compose;
-
-// const composeEnchancers =
-//   window.__REDUX_DEVTOOLS_EXTENSION__ &&
-//   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-
-const composeEnchancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   reducers,
-  composeEnchancers(applyMiddleware(sagaMiddleware)),
+  composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
 sagaMiddleware.run(rootSaga);
 
