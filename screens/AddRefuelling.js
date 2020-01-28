@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Button, Text, TextInput, Switch, ScrollView} from 'react-native';
+import {
+  View,
+  Button,
+  Text,
+  TextInput,
+  Switch,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import InputField from '../components/InputField';
 import ButtonClassic from '../components/ButtonClassic';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -37,54 +45,59 @@ const AddRefuelling = props => {
   };
 
   return (
-    <ScrollView>
-      <InputField
-        title="Przebieg"
-        value={mileage}
-        onChangeText={text => setMileage(text)}
-        keyboardType="number-pad"
-      />
-      <InputField
-        title="Data"
-        value={date}
-        onChangeText={text => setDate(text)}
-      />
-      <InputField
-        title="Zatankowano"
-        value={liters}
-        onChangeText={text => setLiters(text)}
-        keyboardType="number-pad"
-      />
-      <InputField
-        title="Cena za litr"
-        value={priceLiter}
-        onChangeText={text => setPriceLiter(text)}
-        keyboardType="number-pad"
-      />
-      <InputField
-        title="Zapłacono"
-        value={amount}
-        onChangeText={text => setAmount(text)}
-        keyboardType="number-pad"
-      />
-
-      {/*<Text>Tankowanie do pełna</Text>*/}
-      {/*<Switch />*/}
-      <ButtonClassic
-        title="Dodaj tankowanie"
-        onPress={addRefuellingButtonHandler}
-      />
-      <Button title="date" onPress={() => setShowDatepicker(true)} />
-      {showDatepicker && (
-        <DateTimePicker
-          value={new Date()}
-          mode={'date'}
-          is24Hour={true}
-          display="default"
-          onChange={dateChangeHandler}
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={15}
+      behavior="marginrr"
+      style={{flex: 1}}>
+      <ScrollView>
+        <InputField
+          title="Przebieg"
+          value={mileage}
+          onChangeText={text => setMileage(text)}
+          keyboardType="number-pad"
         />
-      )}
-    </ScrollView>
+        <InputField
+          title="Data"
+          value={date}
+          onChangeText={text => setDate(text)}
+        />
+        <InputField
+          title="Zatankowano"
+          value={liters}
+          onChangeText={text => setLiters(text)}
+          keyboardType="number-pad"
+        />
+        <InputField
+          title="Cena za litr"
+          value={priceLiter}
+          onChangeText={text => setPriceLiter(text)}
+          keyboardType="number-pad"
+        />
+        <InputField
+          title="Zapłacono"
+          value={amount}
+          onChangeText={text => setAmount(text)}
+          keyboardType="number-pad"
+        />
+
+        {/*<Text>Tankowanie do pełna</Text>*/}
+        {/*<Switch />*/}
+        <ButtonClassic
+          title="Dodaj tankowanie"
+          onPress={addRefuellingButtonHandler}
+        />
+        <Button title="date" onPress={() => setShowDatepicker(true)} />
+        {showDatepicker && (
+          <DateTimePicker
+            value={new Date()}
+            mode={'date'}
+            is24Hour={true}
+            display="default"
+            onChange={dateChangeHandler}
+          />
+        )}
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
