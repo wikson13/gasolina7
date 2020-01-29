@@ -8,7 +8,8 @@ const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.GET_DATA_SUCCESS: {
       return {
-        data: action.payload.data,
+        refuellings: action.payload.data.refuellings,
+        services: action.payload.data.services,
       };
     }
     default:

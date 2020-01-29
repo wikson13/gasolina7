@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Switch,
+  Keyboard,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -13,6 +14,8 @@ import ButtonClassic from '../components/ButtonClassic';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as dataActions from '../redux/data/dataActions';
 import {useDispatch} from 'react-redux';
+import moment from 'moment';
+
 const AddRefuelling = props => {
   const [mileage, setMileage] = useState('');
   const [date, setDate] = useState('');
@@ -22,13 +25,9 @@ const AddRefuelling = props => {
   const [showDatepicker, setShowDatepicker] = useState(false);
 
   const [mileageErr, setMileageErr] = useState(null);
+  const [litersErr, setLitersErr] = useState(null);
 
   const dispatch = useDispatch();
-  const dateChangeHandler = (event, date) => {
-    console.log(date);
-    setShowDatepicker(false);
-    setDate(String(date));
-  };
 
   const generateId = () => {
     return new Date().getTime();
@@ -51,11 +50,35 @@ const AddRefuelling = props => {
     if (text.trim().length <= 0) {
       setMileageErr('To pole jest wymagane');
     } else if (!/^\d+$/.test(text)) {
-      setMileageErr('Tylko liczby');
+      setMileageErr('Wpisano nieprawidłową wartość');
     } else {
       setMileageErr(null);
     }
     setMileage(text);
+  };
+
+  const dateInputHandler = () => {
+    setShowDatepicker(true);
+    Keyboard.dismiss();
+  };
+
+  const dateChangeHandler = (event, date) => {
+    setShowDatepicker(false);
+
+    const formatedDate = moment(date).format('DD.MM.YYYY');
+    setDate(formatedDate);
+    Keyboard.dismiss();
+  };
+
+  const litersInputHandler = text => {
+    if (text.trim().length <= 0) {
+      setLitersErr('To pole jest wymagane');
+    } else if (!/^[+]?([0-9]{1,4})[.,]{0,1}([0-9]{0,3})?$/.test(text)) {
+      setLitersErr('Wpisano nieprawidłową wartość');
+    } else {
+      setLitersErr(null);
+    }
+    setLiters(text);
   };
 
   return (
@@ -75,13 +98,14 @@ const AddRefuelling = props => {
           title="Data"
           value={date}
           onChangeText={text => setDate(text)}
-          errorMsg="ee"
+          onFocus={() => setShowDatepicker(true)}
         />
         <InputField
           title="Zatankowano"
           value={liters}
-          onChangeText={text => setLiters(text)}
+          onChangeText={text => litersInputHandler(text)}
           keyboardType="number-pad"
+          errorMsg={litersErr}
         />
         <InputField
           title="Cena za litr"
@@ -102,7 +126,6 @@ const AddRefuelling = props => {
           title="Dodaj tankowanie"
           onPress={addRefuellingButtonHandler}
         />
-        <Button title="date" onPress={() => setShowDatepicker(true)} />
         {showDatepicker && (
           <DateTimePicker
             value={new Date()}

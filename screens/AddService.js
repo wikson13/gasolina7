@@ -1,23 +1,43 @@
 import React, {useState} from 'react';
-import {View, Button, Text, TextInput, Switch} from 'react-native';
+import {View, Button, Text, TextInput, Switch, Keyboard} from 'react-native';
 import InputField from '../components/InputField';
 import ButtonClassic from '../components/ButtonClassic';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import * as dataActions from '../redux/data/dataActions';
+import moment from 'moment';
+import {useDispatch} from 'react-redux';
 
 const AddService = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [mileage, setMileage] = useState('');
   const [date, setDate] = useState('');
-  const [priceLiter, setPriceLiter] = useState('');
   const [amount, setAmount] = useState('');
 
   const [showDatepicker, setShowDatepicker] = useState(false);
-
+  const dispatch = useDispatch();
   const dateChangeHandler = (event, date) => {
-    console.log(date);
     setShowDatepicker(false);
-    setDate(String(date));
+
+    const formatedDate = moment(date).format('DD.MM.YYYY');
+    setDate(formatedDate);
+    Keyboard.dismiss();
+  };
+
+  const generateId = () => {
+    return new Date().getTime();
+  };
+
+  const addServiceButtonHandler = () => {
+    const service = {
+      title,
+      description,
+      mileage,
+      date,
+      amount,
+      id: generateId(),
+    };
+    dispatch(dataActions.addServiceRequest(service));
   };
 
   return (
@@ -43,8 +63,8 @@ const AddService = () => {
       <InputField
         title="Data"
         value={date}
-        onChangeText={text => setDate(text)}
         keyboardType="number-pad"
+        onFocus={() => setShowDatepicker(true)}
       />
       <InputField
         title="Zapłacono"
@@ -54,8 +74,7 @@ const AddService = () => {
       />
       {/*<Text>Tankowanie do pełna</Text>*/}
       {/*<Switch />*/}
-      <ButtonClassic title="Dodaj serwis" />
-      <Button title="date" onPress={() => setShowDatepicker(true)} />
+      <ButtonClassic title="Dodaj serwis" onPress={addServiceButtonHandler} />
       {showDatepicker && (
         <DateTimePicker
           value={new Date()}

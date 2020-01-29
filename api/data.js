@@ -1,20 +1,23 @@
 import axios from 'axios';
 
 export const getData = () => {
-  return axios.get('https://gasolina-native.firebaseio.com/data.json', {
-    params: {
-      limit: 1000,
+  return axios.get(
+    'https://gasolina-native.firebaseio.com/users/username/.json',
+    {
+      params: {
+        limit: 1000,
+      },
     },
-  });
+  );
 };
 
-export const addUser = ({firstName, lastName, id}) => {
-  return axios.put(`https://gasolina-native.firebaseio.com/users/${id}.json`, {
-    firstName: firstName,
-    lastName: lastName,
-    id: id,
-  });
-};
+// export const addUser = ({firstName, lastName, id}) => {
+//   return axios.put(`https://gasolina-native.firebaseio.com/users/${id}.json`, {
+//     firstName: firstName,
+//     lastName: lastName,
+//     id: id,
+//   });
+// };
 
 export const addRefuelling = ({
   mileage,
@@ -25,12 +28,25 @@ export const addRefuelling = ({
   id,
 }) => {
   return axios.put(
-    `https://gasolina-native.firebaseio.com/refuellings/${id}.json`,
+    `https://gasolina-native.firebaseio.com/users/username/refuellings/${id}.json`,
     {
       mileage,
       date,
       liters,
       priceLiter,
+      amount,
+    },
+  );
+};
+
+export const addService = ({title, description, mileage, date, amount, id}) => {
+  return axios.put(
+    `https://gasolina-native.firebaseio.com/users/username/services/${id}.json`,
+    {
+      title,
+      description,
+      mileage,
+      date,
       amount,
     },
   );

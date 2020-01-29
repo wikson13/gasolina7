@@ -5,10 +5,9 @@ import * as api from '../../api/data';
 function* getData() {
   try {
     const result = yield call(api.getData);
-    console.log(result);
     yield put(
       actions.getDataSuccess({
-        users: result.data,
+        data: result.data,
       }),
     );
   } catch (e) {
@@ -30,7 +29,7 @@ function* addRefuelling(action) {
       amount: action.payload.amount,
       id: action.payload.id,
     });
-    // yield call(getUsers);
+    yield call(getData);
   } catch (e) {
     console.log(e);
   }
@@ -40,9 +39,30 @@ function* watchAddRefuelling() {
   yield takeEvery(actions.ADD_REFUELLING_REQUEST, addRefuelling);
 }
 
+function* addService(action) {
+  try {
+    yield call(api.addService, {
+      title: action.payload.title,
+      description: action.payload.description,
+      mileage: action.payload.mileage,
+      date: action.payload.date,
+      amount: action.payload.amount,
+      id: action.payload.id,
+    });
+    yield call(getData);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function* watchAddService() {
+  yield takeEvery(actions.ADD_SERVICE_REQUEST, addService);
+}
+
 const dataSagas = [
   fork(watchGetDataRequest),
   fork(watchAddRefuelling),
+  fork(watchAddService),
   // fork(watchDeleteUserRequest),
 ];
 

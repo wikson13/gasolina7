@@ -15,6 +15,7 @@ const InputField = props => {
         value={props.value}
         onChangeText={props.onChangeText}
         keyboardType={props.keyboardType}
+        onFocus={props.onFocus}
       />
       {props.errorMsg && <Text style={styles.errorMsg}>{props.errorMsg}</Text>}
     </View>

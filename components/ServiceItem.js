@@ -13,7 +13,7 @@ import colors from '../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ButtonClassic from './ButtonClassic';
 
-const RefuellingItem = props => {
+const ServiceItem = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const iconStyle = {
     size: 20,
@@ -170,4 +170,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RefuellingItem;
+export default ServiceItem;
