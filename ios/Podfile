@@ -36,6 +36,8 @@ target 'gasolina7' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'gasolina7Tests' do
     inherit! :search_paths
     # Pods for testing

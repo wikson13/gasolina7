@@ -7,7 +7,7 @@ import * as dataActions from '../redux/data/dataActions';
 import moment from 'moment';
 import {useDispatch} from 'react-redux';
 
-const AddService = () => {
+const AddService = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [mileage, setMileage] = useState('');
@@ -38,6 +38,7 @@ const AddService = () => {
       id: generateId(),
     };
     dispatch(dataActions.addServiceRequest(service));
+    props.navigation.navigate('Service');
   };
 
   return (

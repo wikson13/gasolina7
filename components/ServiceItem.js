@@ -12,6 +12,7 @@ import {
 import colors from '../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ButtonClassic from './ButtonClassic';
+import RefuellingItem from './RefuellingItem';
 
 const ServiceItem = props => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,47 +23,14 @@ const ServiceItem = props => {
 
   return (
     <>
-      <View style={styles.refuellingItem}>
-        <View style={styles.consumptionBox}>
-          <Text style={styles.consumption}>7.83</Text>
-          <Text style={styles.unit}>l/100km</Text>
-        </View>
+      <View style={styles.serviceItem}>
         <View style={styles.data}>
-          <View style={styles.column}>
-            <View style={styles.valueBox}>
-              <Icon
-                name="calendar-today"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>{props.date}</Text>
-            </View>
-            <View style={styles.valueBox}>
-              <Icon
-                name="speedometer"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>{props.mileage}</Text>
-            </View>
+          <View style={styles.firstRow}>
+            <Text style={styles.firstRowText}>{props.title}</Text>
           </View>
-          <View style={styles.column}>
-            <View style={styles.valueBox}>
-              <Icon
-                name="credit-card"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>{props.amount}</Text>
-            </View>
-            <View style={styles.valueBox}>
-              <Icon
-                name="gas-station"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>{props.liters}</Text>
-            </View>
+          <View style={styles.secondRow}>
+            <Text style={styles.secondRowText}>{props.date}</Text>
+            <Text style={styles.secondRowText}>{props.amount} zł</Text>
           </View>
         </View>
         <TouchableOpacity
@@ -100,7 +68,7 @@ const ServiceItem = props => {
 };
 
 const styles = StyleSheet.create({
-  refuellingItem: {
+  serviceItem: {
     backgroundColor: '#fff',
     marginVertical: 5,
     marginHorizontal: 10,
@@ -122,8 +90,7 @@ const styles = StyleSheet.create({
   },
   data: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
     padding: 4,
   },
   column: {
@@ -167,6 +134,17 @@ const styles = StyleSheet.create({
   buttonDelete: {
     flex: 1,
     backgroundColor: '#e74c3c',
+  },
+  secondRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  secondRowText: {
+    fontSize: 17,
+    color: '#747d8c',
+  },
+  firstRowText: {
+    fontSize: 18,
   },
 });
 
