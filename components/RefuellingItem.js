@@ -89,7 +89,11 @@ const RefuellingItem = props => {
               <Text>Zapłacono: {props.amount}</Text>
             </View>
             <View style={styles.buttonsContainer}>
-              <ButtonClassic title="Edytuj" style={styles.buttonEdit} />
+              <ButtonClassic
+                title="Edytuj"
+                style={styles.buttonEdit}
+                onPress={() => props.navigation.navigate('AddRefuelling')}
+              />
               <ButtonClassic title="Usuń" style={styles.buttonDelete} />
             </View>
           </View>

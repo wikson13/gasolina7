@@ -38,16 +38,7 @@ const Fuel = props => {
               title="Dodaj tankowanie"
               onPress={() => props.navigation.navigate('AddRefuelling')}
             />
-            <View>
-              {/*<RefuellingItem*/}
-              {/*  date="08.12.2019"*/}
-              {/*  mileage="100784"*/}
-              {/*  amount="195.67"*/}
-              {/*  liters="39.45"*/}
-              {/*/>*/}
-
-              {generateRefuellingsList(data)}
-            </View>
+            <View>{generateRefuellingsList(data)}</View>
           </>
         </View>
       )}

@@ -38,7 +38,8 @@ const App: () => React$Node = props => {
       {/*  <TopBar />*/}
       {/*</View>*/}
       <View style={styles.content}>
-        <AppNavigation />
+        {/*<AppNavigation />*/}
+        <LoginForm />
       </View>
 
       {/*<View style={styles.tabNav}>*/}

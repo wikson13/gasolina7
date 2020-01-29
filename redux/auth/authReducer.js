@@ -4,25 +4,20 @@ const initialState = {
   token: null,
   userId: null,
   userEmail: null,
-  error: null,
   loading: false,
+  err: null,
 };
 
-export default function(state = initialState, action) {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.AUTH_START:
       return {
         ...state,
         loading: true,
-        error: null,
-      };
-    case actions.AUTH_FAILED:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
+        err: null,
       };
     case actions.AUTH_SUCCESS:
+      console.log(action);
       return {
         ...state,
         token: action.payload.token,
@@ -30,14 +25,15 @@ export default function(state = initialState, action) {
         userEmail: action.payload.userEmail,
         loading: false,
       };
-    case actionTypes.LOGOUT_SUCCESS:
+    case actions.AUTH_FAILED:
       return {
         ...state,
-        token: null,
-        userId: null,
-        userEmail: null,
+        loading: false,
+        err: action.payload,
       };
     default:
       return state;
   }
-}
+};
+
+export default authReducer;

@@ -5,10 +5,12 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import dataReducer from '../data/dataReducer';
+import authReducer from '../auth/authReducer';
 
 const reducers = combineReducers({
   counter: counterReducer,
   data: dataReducer,
+  auth: authReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
