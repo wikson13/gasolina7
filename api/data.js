@@ -1,7 +1,10 @@
 import axios from 'axios';
+import {useSelector} from 'react-redux';
+import React from 'react';
 
 export const getData = username => {
   console.log(username.username);
+  console.log('ee');
   return axios.get(
     `https://gasolina-native.firebaseio.com/users/${username.username}/.json`,
     {
