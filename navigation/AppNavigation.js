@@ -9,9 +9,12 @@ import AddService from '../screens/AddService';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import {color} from 'react-native-reanimated';
 import colors from '../constants/colors';
-
+import {createDrawerNavigator} from 'react-navigation-drawer';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import HeaderButton from '../components/HeaderButton';
 const iconStyle = {
   size: 30,
   color: '#57606f',
@@ -93,4 +96,25 @@ const TabNavigation = createBottomTabNavigator(
   },
 );
 
-export default createAppContainer(TabNavigation);
+Fuel.navigationOptions = navData => {
+  return {
+    headerTitle: 'eee',
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName="menu"
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
+};
+
+const MainNavigation = createDrawerNavigator({
+  Tab: TabNavigation,
+});
+
+export default createAppContainer(MainNavigation);

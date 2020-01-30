@@ -17,12 +17,11 @@ const authReducer = (state = initialState, action) => {
         err: null,
       };
     case actions.AUTH_SUCCESS:
-      console.log(action);
       return {
         ...state,
-        token: action.payload.token,
-        userId: action.payload.userId,
-        userEmail: action.payload.userEmail,
+        token: action.payload.idToken,
+        userId: action.payload.localId,
+        userEmail: action.payload.email,
         loading: false,
       };
     case actions.AUTH_FAILED:
@@ -30,6 +29,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         err: action.payload,
+      };
+    case actions.AUTH_LOGOUT:
+      return {
+        ...state,
+        userId: null,
+        userEmail: null,
+        token: null,
       };
     default:
       return state;

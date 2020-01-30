@@ -38,6 +38,8 @@ target 'gasolina7' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'gasolina7Tests' do
     inherit! :search_paths
     # Pods for testing

@@ -16,12 +16,11 @@ function* authRequest({payload}) {
     password: payload.password,
     returnSecureToken: true,
   };
-  console.log(url);
-  console.log(payload);
   try {
     const response = yield axios.post(url, userData);
     yield put(authActions.authSuccess(response.data));
   } catch (e) {
+    console.log(e);
     yield put(authActions.authFailed(e.response.data.error));
   }
 }

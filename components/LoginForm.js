@@ -41,6 +41,7 @@ const LoginForm = () => {
       <ButtonClassic
         title={isLogin ? 'Switch to sign up' : 'Switch to sign in'}
         onPress={() => setIsLogin(!isLogin)}
+        style={{backgroundColor: '#ff6348'}}
       />
     </View>
   );
