@@ -2,9 +2,9 @@ import {takeEvery, takeLatest, take, call, put, fork} from 'redux-saga/effects';
 import * as actions from './dataActions';
 import * as api from '../../api/data';
 
-function* getData() {
+function* getData(action) {
   try {
-    const result = yield call(api.getData);
+    const result = yield call(api.getData, {username: action.payload.username});
     yield put(
       actions.getDataSuccess({
         data: result.data,

@@ -7,6 +7,9 @@ export const ADD_SERVICE_REQUEST = 'ADD_SERVICE_REQUEST';
 
 export const getDataRequest = () => ({
   type: GET_DATA_REQUEST,
+  payload: {
+    username: 'test@test.pl',
+  },
 });
 
 export const getDataSuccess = ({data}) => {

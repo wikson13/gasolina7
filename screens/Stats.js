@@ -41,8 +41,10 @@ const Stats = () => {
             // backgroundGradientFrom: colors.primaryColor,
             backgroundGradientTo: '#fff',
             decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(251, 202, 35, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            // color: (opacity = 1) => `rgba(251, 202, 35, ${opacity})`,
+            color: () => 'red',
+            labelColor: () => 'blue',
+            // labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {
               borderRadius: 16,
             },

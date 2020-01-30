@@ -37,6 +37,13 @@ const authReducer = (state = initialState, action) => {
         userEmail: null,
         token: null,
       };
+    case actions.AUTHENTICATE:
+      return {
+        ...state,
+        token: action.payload.token,
+        userId: action.payload.userId,
+        userEmail: action.payload.email,
+      };
     default:
       return state;
   }

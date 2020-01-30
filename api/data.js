@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-export const getData = () => {
+export const getData = username => {
+  console.log(username.username);
   return axios.get(
-    'https://gasolina-native.firebaseio.com/users/username/.json',
+    `https://gasolina-native.firebaseio.com/users/${username.username}/.json`,
     {
       params: {
         limit: 1000,

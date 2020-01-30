@@ -40,6 +40,8 @@ target 'gasolina7' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
   target 'gasolina7Tests' do
     inherit! :search_paths
     # Pods for testing

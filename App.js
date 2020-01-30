@@ -32,36 +32,19 @@ const App: () => React$Node = props => {
   const counter = useSelector(state => state.counter.counter);
   const userId = useSelector(state => state.auth.userId);
   const authLoading = useSelector(state => state.auth.loading);
+  const [showLogin, setShowLogin] = useState(true);
   useEffect(() => {
     // dispatch(dataActions.getDataRequest());
-    const tryLogin = async () => {
-      const userData = await AsyncStorage.getItem('userData');
-      if (!userData) {
-        console.log('AUTH');
-        return;
-      }
-      const transformedData = JSON.parse(userData);
-      const {token, userId, expiryDate} = transformedData;
-      const expirationDate = new Date(expiryDate);
-      if (expirationDate <= new Date() || !token || !userId) {
-        console.log('AUTH');
-        return;
-      }
-      console.log('APP');
-    };
-    tryLogin();
   }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        {authLoading ? <Loading /> : 1 ? <AppNavigation /> : <LoginForm />}
+        <AppNavigation />
+
         {/*{authLoading ? <Loading /> : userId ? <AppNavigation /> : <LoginForm />}*/}
         {/*{userId ? <AppNavigation /> : <LoginForm />}*/}
-        <ButtonClassic
-          title="logout"
-          onPress={() => dispatch(authActions.authLogout())}
-        />
+
         {/*<AppNavigation />*/}
         {/*<LoginForm />*/}
       </View>
