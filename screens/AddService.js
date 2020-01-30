@@ -5,7 +5,7 @@ import ButtonClassic from '../components/ButtonClassic';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as dataActions from '../redux/data/dataActions';
 import moment from 'moment';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const AddService = props => {
   const [title, setTitle] = useState('');
@@ -15,6 +15,8 @@ const AddService = props => {
   const [amount, setAmount] = useState('');
 
   const [showDatepicker, setShowDatepicker] = useState(false);
+  const userEmail = useSelector(state => state.auth.userEmail);
+
   const dispatch = useDispatch();
   const dateChangeHandler = (event, date) => {
     setShowDatepicker(false);
@@ -36,6 +38,7 @@ const AddService = props => {
       date,
       amount,
       id: generateId(),
+      userEmail: userEmail.replace(/\./g, '_'),
     };
     dispatch(dataActions.addServiceRequest(service));
     props.navigation.navigate('Service');

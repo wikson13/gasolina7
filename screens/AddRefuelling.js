@@ -13,7 +13,7 @@ import InputField from '../components/InputField';
 import ButtonClassic from '../components/ButtonClassic';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as dataActions from '../redux/data/dataActions';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 
 const AddRefuelling = props => {
@@ -28,7 +28,7 @@ const AddRefuelling = props => {
   const [litersErr, setLitersErr] = useState(null);
 
   const dispatch = useDispatch();
-
+  const userEmail = useSelector(state => state.auth.userEmail);
   const generateId = () => {
     return new Date().getTime();
   };
@@ -41,6 +41,7 @@ const AddRefuelling = props => {
       priceLiter,
       amount,
       id: generateId(),
+      userEmail: userEmail.replace(/\./g, '_'),
     };
     dispatch(dataActions.addRefuellingRequest(refuelling));
     props.navigation.navigate('Fuel');

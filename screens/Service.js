@@ -6,6 +6,9 @@ import RefuellingItem from '../components/RefuellingItem';
 import {useSelector} from 'react-redux';
 
 const generateServicesList = data => {
+  if (!data.services) {
+    return null;
+  }
   return Object.keys(data.services).map(service => {
     return (
       <ServiceItem

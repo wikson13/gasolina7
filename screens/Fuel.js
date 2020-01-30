@@ -12,6 +12,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import Loading from '../components/Loading';
 
 const generateRefuellingsList = data => {
+  if (!data.refuellings) {
+    return null;
+  }
   return Object.keys(data.refuellings).map(refuelling => {
     return (
       <RefuellingItem
@@ -25,23 +28,19 @@ const generateRefuellingsList = data => {
   });
 };
 
-const Fuel = props => {
+const Fuel = ({navigation}) => {
   const data = useSelector(state => state.data);
   return (
     <>
-      {data.refuellings === undefined ? (
-        <Loading />
-      ) : (
-        <View style={styles.container}>
-          <>
-            <ButtonClassic
-              title="Dodaj tankowanie"
-              onPress={() => props.navigation.navigate('AddRefuelling')}
-            />
-            <View>{generateRefuellingsList(data)}</View>
-          </>
-        </View>
-      )}
+      <View style={styles.container}>
+        <>
+          <ButtonClassic
+            title="Dodaj tankowanie"
+            onPress={() => navigation.navigate('AddRefuelling')}
+          />
+          <View>{generateRefuellingsList(data)}</View>
+        </>
+      </View>
     </>
   );
 };

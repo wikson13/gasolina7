@@ -105,7 +105,7 @@ const TabNavigation = createBottomTabNavigator(
 
 Fuel.navigationOptions = navData => {
   return {
-    headerTitle: 'eee',
+    headerTitle: 'Paliwo',
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
