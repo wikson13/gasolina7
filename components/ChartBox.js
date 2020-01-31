@@ -3,30 +3,23 @@ import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import colors from '../constants/colors';
 
-const ChartBox = ({title}) => {
+const ChartBox = ({title, values, labels}) => {
   return (
     <View style={styles.chartContainer}>
       <Text style={styles.title}>{title}</Text>
       <LineChart
         data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: labels,
           datasets: [
             {
-              data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-              ],
+              data: values,
             },
           ],
         }}
         width={Dimensions.get('window').width * 0.95} // from react-native
         height={220}
-        yAxisLabel="$"
-        yAxisSuffix="k"
+        // yAxisLabel="$"
+        yAxisSuffix=" zł"
         chartConfig={{
           backgroundColor: 'green',
           backgroundGradientFrom: '#fff',
