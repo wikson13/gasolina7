@@ -13,9 +13,23 @@ import colors from '../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ButtonClassic from './ButtonClassic';
 import RefuellingItem from './RefuellingItem';
+import * as dataActions from '../redux/data/dataActions';
+import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 const ServiceItem = props => {
   const [modalVisible, setModalVisible] = useState(false);
+  const userEmail = useSelector(state => state.auth.userEmail);
+  const dispatch = useDispatch();
+  const deleteButtonHandler = () => {
+    dispatch(
+      dataActions.deleteRequest({
+        type: 'services',
+        id: props.id,
+        userEmail: userEmail.replace(/\./g, '_'),
+      }),
+    );
+  };
   const iconStyle = {
     size: 20,
     color: '#97a0af',
@@ -58,7 +72,11 @@ const ServiceItem = props => {
             </View>
             <View style={styles.buttonsContainer}>
               <ButtonClassic title="Edytuj" style={styles.buttonEdit} />
-              <ButtonClassic title="Usuń" style={styles.buttonDelete} />
+              <ButtonClassic
+                title="Usuń"
+                style={styles.buttonDelete}
+                onPress={deleteButtonHandler}
+              />
             </View>
           </View>
         </TouchableHighlight>

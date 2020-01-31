@@ -18,6 +18,7 @@ const generateServicesList = data => {
         amount={data.services[service].amount}
         title={data.services[service].title}
         description={data.services[service].description}
+        id={service}
       />
     );
   });

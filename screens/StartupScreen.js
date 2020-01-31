@@ -9,7 +9,7 @@ const StartupScreen = props => {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.auth.userId);
   useEffect(() => {
-    AsyncStorage.getItem('userData').then(res => console.log(res));
+    // AsyncStorage.getItem('userData').then(res => console.log(res));
     const tryLogin = async () => {
       const userData = await AsyncStorage.getItem('userData');
       if (!userData) {

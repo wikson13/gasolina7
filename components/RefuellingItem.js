@@ -11,10 +11,36 @@ import {
 } from 'react-native';
 import colors from '../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as dataActions from '../redux/data/dataActions';
 import ButtonClassic from './ButtonClassic';
+import {useDispatch, useSelector} from 'react-redux';
 
 const RefuellingItem = props => {
   const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  const userEmail = useSelector(state => state.auth.userEmail);
+  const deleteButtonHandler = () => {
+    dispatch(
+      dataActions.deleteRequest({
+        type: 'refuellings',
+        id: props.id,
+        userEmail: userEmail.replace(/\./g, '_'),
+      }),
+    );
+  };
+  const editButtonHandler = id => {
+    const editRefuelling = {
+      mileage: props.mileage,
+      date: props.date,
+      liters: props.liters,
+      priceLiter: props.priceLiter,
+      amount: props.amount,
+      id,
+    };
+    props.navigation.navigate('AddRefuelling', editRefuelling);
+    setModalVisible(false);
+  };
+
   const iconStyle = {
     size: 20,
     color: '#97a0af',
@@ -92,9 +118,13 @@ const RefuellingItem = props => {
               <ButtonClassic
                 title="Edytuj"
                 style={styles.buttonEdit}
-                onPress={() => props.navigation.navigate('AddRefuelling')}
+                onPress={() => editButtonHandler(props.id)}
               />
-              <ButtonClassic title="Usuń" style={styles.buttonDelete} />
+              <ButtonClassic
+                title="Usuń"
+                style={styles.buttonDelete}
+                onPress={deleteButtonHandler}
+              />
             </View>
           </View>
         </TouchableHighlight>

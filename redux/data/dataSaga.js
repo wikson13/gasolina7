@@ -3,6 +3,7 @@ import * as actions from './dataActions';
 import * as api from '../../api/data';
 import axios from 'axios';
 import {GET_DATA_REQUEST} from './dataActions';
+import {deleteRequest} from './dataActions';
 
 function* getData(action) {
   try {
@@ -84,15 +85,31 @@ function* addService(action) {
   }
 }
 
+function* deleteItemRequest(action) {
+  const {type, id, userEmail} = action.payload;
+  try {
+    yield axios.delete(
+      `https://gasolina-native.firebaseio.com/users/${userEmail}/${type}/${id}.json`,
+    );
+    yield call(getData, {payload: {userEmail}});
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 function* watchAddService() {
   yield takeEvery(actions.ADD_SERVICE_REQUEST, addService);
+}
+
+function* watchDeleteItemRequest() {
+  yield takeLatest(actions.DELETE_REQUEST, deleteItemRequest);
 }
 
 const dataSagas = [
   fork(watchGetDataRequest),
   fork(watchAddRefuelling),
   fork(watchAddService),
-  // fork(watchDeleteUserRequest),
+  fork(watchDeleteItemRequest),
 ];
 
 export default dataSagas;

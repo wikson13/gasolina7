@@ -17,11 +17,25 @@ import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 
 const AddRefuelling = props => {
-  const [mileage, setMileage] = useState('');
-  const [date, setDate] = useState('');
-  const [liters, setLiters] = useState('');
-  const [priceLiter, setPriceLiter] = useState('');
-  const [amount, setAmount] = useState('');
+  let editRefuelling = null;
+  if (props.navigation.state.params) {
+    editRefuelling = props.navigation.state.params;
+  }
+  const [mileage, setMileage] = useState(
+    editRefuelling === null ? '' : editRefuelling.mileage,
+  );
+  const [date, setDate] = useState(
+    editRefuelling === null ? '' : editRefuelling.date,
+  );
+  const [liters, setLiters] = useState(
+    editRefuelling === null ? '' : editRefuelling.liters,
+  );
+  const [priceLiter, setPriceLiter] = useState(
+    editRefuelling === null ? '' : editRefuelling.priceLiter,
+  );
+  const [amount, setAmount] = useState(
+    editRefuelling === null ? '' : editRefuelling.amount,
+  );
   const [showDatepicker, setShowDatepicker] = useState(false);
 
   const [mileageErr, setMileageErr] = useState(null);
@@ -32,7 +46,6 @@ const AddRefuelling = props => {
   const generateId = () => {
     return new Date().getTime();
   };
-
   const addRefuellingButtonHandler = () => {
     const refuelling = {
       mileage,
@@ -40,7 +53,8 @@ const AddRefuelling = props => {
       liters,
       priceLiter,
       amount,
-      id: generateId(),
+      id: editRefuelling === null ? generateId() : editRefuelling.id,
+
       userEmail: userEmail.replace(/\./g, '_'),
     };
     dispatch(dataActions.addRefuellingRequest(refuelling));
@@ -124,7 +138,9 @@ const AddRefuelling = props => {
         {/*<Text>Tankowanie do pełna</Text>*/}
         {/*<Switch />*/}
         <ButtonClassic
-          title="Dodaj tankowanie"
+          title={
+            editRefuelling === null ? 'Dodaj tankowanie' : 'Zapisz tankowanie'
+          }
           onPress={addRefuellingButtonHandler}
         />
         {showDatepicker && (

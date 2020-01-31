@@ -11,7 +11,7 @@ import RefuellingItem from '../components/RefuellingItem';
 import {useDispatch, useSelector} from 'react-redux';
 import Loading from '../components/Loading';
 
-const generateRefuellingsList = data => {
+const generateRefuellingsList = (data, navigation) => {
   if (!data.refuellings) {
     return null;
   }
@@ -23,6 +23,9 @@ const generateRefuellingsList = data => {
         mileage={data.refuellings[refuelling].mileage}
         amount={data.refuellings[refuelling].amount}
         liters={data.refuellings[refuelling].liters}
+        priceLiter={data.refuellings[refuelling].priceLiter}
+        id={refuelling}
+        navigation={navigation}
       />
     );
   });
@@ -38,7 +41,7 @@ const Fuel = ({navigation}) => {
             title="Dodaj tankowanie"
             onPress={() => navigation.navigate('AddRefuelling')}
           />
-          <View>{generateRefuellingsList(data)}</View>
+          <View>{generateRefuellingsList(data, navigation)}</View>
         </>
       </View>
     </>
