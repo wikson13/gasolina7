@@ -8,11 +8,25 @@ import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
 
 const AddService = props => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [mileage, setMileage] = useState('');
-  const [date, setDate] = useState('');
-  const [amount, setAmount] = useState('');
+  let editService = null;
+  if (props.navigation.state.params) {
+    editService = props.navigation.state.params;
+  }
+  const [title, setTitle] = useState(
+    editService === null ? '' : editService.title,
+  );
+  const [description, setDescription] = useState(
+    editService === null ? '' : editService.description,
+  );
+  const [mileage, setMileage] = useState(
+    editService === null ? '' : editService.mileage,
+  );
+  const [date, setDate] = useState(
+    editService === null ? '' : editService.date,
+  );
+  const [amount, setAmount] = useState(
+    editService === null ? '' : editService.amount,
+  );
 
   const [showDatepicker, setShowDatepicker] = useState(false);
   const userEmail = useSelector(state => state.auth.userEmail);
@@ -37,7 +51,7 @@ const AddService = props => {
       mileage,
       date,
       amount,
-      id: generateId(),
+      id: editService === null ? generateId() : editService.id,
       userEmail: userEmail.replace(/\./g, '_'),
     };
     dispatch(dataActions.addServiceRequest(service));
@@ -78,7 +92,10 @@ const AddService = props => {
       />
       {/*<Text>Tankowanie do pełna</Text>*/}
       {/*<Switch />*/}
-      <ButtonClassic title="Dodaj serwis" onPress={addServiceButtonHandler} />
+      <ButtonClassic
+        title={editService === null ? 'Dodaj serwis' : 'Zapisz serwis'}
+        onPress={addServiceButtonHandler}
+      />
       {showDatepicker && (
         <DateTimePicker
           value={new Date()}

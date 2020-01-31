@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     textTransform: 'uppercase',
+    // fontFamily: 'Montserrat-Bold',
   },
 });
 

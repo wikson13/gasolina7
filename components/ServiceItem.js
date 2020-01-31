@@ -30,6 +30,20 @@ const ServiceItem = props => {
       }),
     );
   };
+
+  const editButtonHandler = () => {
+    const editService = {
+      mileage: props.mileage,
+      date: props.date,
+      amount: props.amount,
+      title: props.title,
+      description: props.description,
+      id: props.id,
+    };
+    props.navigation.navigate('AddService', editService);
+    setModalVisible(false);
+  };
+
   const iconStyle = {
     size: 20,
     color: '#97a0af',
@@ -71,7 +85,11 @@ const ServiceItem = props => {
               <Text>Zapłacono: {props.amount}</Text>
             </View>
             <View style={styles.buttonsContainer}>
-              <ButtonClassic title="Edytuj" style={styles.buttonEdit} />
+              <ButtonClassic
+                title="Edytuj"
+                style={styles.buttonEdit}
+                onPress={editButtonHandler}
+              />
               <ButtonClassic
                 title="Usuń"
                 style={styles.buttonDelete}

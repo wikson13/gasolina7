@@ -54,7 +54,6 @@ const AddRefuelling = props => {
       priceLiter,
       amount,
       id: editRefuelling === null ? generateId() : editRefuelling.id,
-
       userEmail: userEmail.replace(/\./g, '_'),
     };
     dispatch(dataActions.addRefuellingRequest(refuelling));

@@ -10,7 +10,7 @@
 //https://materialdesignicons.com/
 
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, Button, View} from 'react-native';
+import {StyleSheet, Text, Button, View, SafeAreaView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import * as counterActions from './redux/counter/counterActions';
 import * as dataActions from './redux/data/dataActions';

@@ -54,5 +54,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnmp": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }

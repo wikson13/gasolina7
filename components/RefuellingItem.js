@@ -28,14 +28,14 @@ const RefuellingItem = props => {
       }),
     );
   };
-  const editButtonHandler = id => {
+  const editButtonHandler = () => {
     const editRefuelling = {
       mileage: props.mileage,
       date: props.date,
       liters: props.liters,
       priceLiter: props.priceLiter,
       amount: props.amount,
-      id,
+      id: props.id,
     };
     props.navigation.navigate('AddRefuelling', editRefuelling);
     setModalVisible(false);
@@ -118,7 +118,7 @@ const RefuellingItem = props => {
               <ButtonClassic
                 title="Edytuj"
                 style={styles.buttonEdit}
-                onPress={() => editButtonHandler(props.id)}
+                onPress={() => editButtonHandler()}
               />
               <ButtonClassic
                 title="Usuń"
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 2,
     flexDirection: 'row',
+    overflow: 'hidden',
   },
   consumptionBox: {
     backgroundColor: colors.primaryColor,

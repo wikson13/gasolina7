@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TextInput, StyleSheet, SafeAreaView} from 'react-native';
 import InputField from './InputField';
 import ButtonClassic from './ButtonClassic';
 import {useDispatch, useSelector} from 'react-redux';

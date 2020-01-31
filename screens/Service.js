@@ -5,7 +5,7 @@ import ServiceItem from '../components/ServiceItem';
 import RefuellingItem from '../components/RefuellingItem';
 import {useSelector} from 'react-redux';
 
-const generateServicesList = data => {
+const generateServicesList = (data, navigation) => {
   if (!data.services) {
     return null;
   }
@@ -19,12 +19,13 @@ const generateServicesList = data => {
         title={data.services[service].title}
         description={data.services[service].description}
         id={service}
+        navigation={navigation}
       />
     );
   });
 };
 
-const Service = props => {
+const Service = ({navigation}) => {
   const data = useSelector(state => state.data);
 
   return (
@@ -32,9 +33,9 @@ const Service = props => {
       <>
         <ButtonClassic
           title="Dodaj serwis"
-          onPress={() => props.navigation.navigate('AddService')}
+          onPress={() => navigation.navigate('AddService')}
         />
-        <View>{generateServicesList(data)}</View>
+        <View>{generateServicesList(data, navigation)}</View>
       </>
     </View>
   );
