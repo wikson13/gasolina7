@@ -20,6 +20,7 @@ const AddRefuelling = props => {
   let editRefuelling = null;
   if (props.navigation.state.params) {
     editRefuelling = props.navigation.state.params;
+    console.log(editRefuelling);
   }
   const [mileage, setMileage] = useState(
     editRefuelling === null ? '' : editRefuelling.mileage,
@@ -36,6 +37,11 @@ const AddRefuelling = props => {
   const [amount, setAmount] = useState(
     editRefuelling === null ? '' : editRefuelling.amount,
   );
+
+  const [fullRefuelling, setFullRefuelling] = useState(
+    editRefuelling === null ? true : editRefuelling.fullRefuelling,
+  );
+
   const [showDatepicker, setShowDatepicker] = useState(false);
 
   const [mileageErr, setMileageErr] = useState(null);
@@ -53,6 +59,7 @@ const AddRefuelling = props => {
       liters,
       priceLiter,
       amount,
+      fullRefuelling,
       id: editRefuelling === null ? generateId() : editRefuelling.id,
       userEmail: userEmail.replace(/\./g, '_'),
     };
@@ -134,8 +141,11 @@ const AddRefuelling = props => {
           keyboardType="number-pad"
         />
 
-        {/*<Text>Tankowanie do pełna</Text>*/}
-        {/*<Switch />*/}
+        <Text>Tankowanie do pełna</Text>
+        <Switch
+          value={fullRefuelling}
+          onValueChange={() => setFullRefuelling(!fullRefuelling)}
+        />
         <ButtonClassic
           title={
             editRefuelling === null ? 'Dodaj tankowanie' : 'Zapisz tankowanie'

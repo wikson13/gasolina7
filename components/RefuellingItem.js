@@ -35,6 +35,7 @@ const RefuellingItem = props => {
       liters: props.liters,
       priceLiter: props.priceLiter,
       amount: props.amount,
+      fullRefuelling: props.fullRefuelling,
       id: props.id,
     };
     props.navigation.navigate('AddRefuelling', editRefuelling);

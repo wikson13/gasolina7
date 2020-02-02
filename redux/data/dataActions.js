@@ -6,12 +6,14 @@ export const ADD_REFUELLING_REQUEST = 'ADD_REFUELLING_REQUEST';
 export const ADD_SERVICE_REQUEST = 'ADD_SERVICE_REQUEST';
 export const DELETE_REQUEST = 'DELETE_REQUEST';
 
-export const getDataRequest = () => ({
-  type: GET_DATA_REQUEST,
-  payload: {
-    userEmail: 'test@test_pl',
-  },
-});
+export const getDataRequest = () => {
+  return {
+    type: GET_DATA_REQUEST,
+    payload: {
+      userEmail: 'test@test_pl',
+    },
+  };
+};
 
 export const getDataSuccess = ({data}) => {
   return {

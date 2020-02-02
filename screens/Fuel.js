@@ -24,6 +24,7 @@ const generateRefuellingsList = (data, navigation) => {
         amount={data.refuellings[refuelling].amount}
         liters={data.refuellings[refuelling].liters}
         priceLiter={data.refuellings[refuelling].priceLiter}
+        fullRefuelling={data.refuellings[refuelling].fullRefuelling}
         id={refuelling}
         navigation={navigation}
       />

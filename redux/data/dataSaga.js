@@ -5,6 +5,10 @@ import axios from 'axios';
 import {GET_DATA_REQUEST} from './dataActions';
 import {deleteRequest} from './dataActions';
 
+function testt() {
+  console.log('testt');
+}
+
 function* getData(action) {
   try {
     const result = yield axios.get(
@@ -12,11 +16,13 @@ function* getData(action) {
         action.payload.userEmail
       }/.json`,
     );
-    yield put(
-      actions.getDataSuccess({
-        data: result.data,
-      }),
-    );
+    yield call(testt);
+    console.log(result);
+    // yield put(
+    //   actions.getDataSuccess({
+    //     data: result.data,
+    //   }),
+    // );
   } catch (e) {
     console.log(e);
   }
@@ -33,6 +39,7 @@ function* addRefuelling(action) {
     liters,
     priceLiter,
     amount,
+    fullRefuelling,
     id,
     userEmail,
   } = action.payload;
@@ -45,6 +52,7 @@ function* addRefuelling(action) {
         liters,
         priceLiter,
         amount,
+        fullRefuelling,
       },
     );
 
