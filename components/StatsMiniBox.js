@@ -2,14 +2,16 @@ import React from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const StatsMiniBox = ({title, data, iconName}) => {
+const StatsMiniBox = ({title, data, iconName, unit}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.icon}>
         <Icon name={iconName} size={30} color="#444" />
       </View>
-      <Text style={styles.data}>{data} zł</Text>
+      <Text style={styles.data}>
+        {data} {unit}
+      </Text>
     </View>
   );
 };

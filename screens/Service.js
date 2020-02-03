@@ -1,33 +1,23 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import ButtonClassic from '../components/ButtonClassic';
 import ServiceItem from '../components/ServiceItem';
-import RefuellingItem from '../components/RefuellingItem';
 import {useSelector} from 'react-redux';
 
-const generateServicesList = (data, navigation) => {
-  if (!data.services) {
+let list;
+const generateServicesList = data => {
+  if (!data.refuellings) {
     return null;
   }
-  return Object.keys(data.services).map(service => {
-    return (
-      <ServiceItem
-        key={service}
-        date={data.services[service].date}
-        mileage={data.services[service].mileage}
-        amount={data.services[service].amount}
-        title={data.services[service].title}
-        description={data.services[service].description}
-        id={service}
-        navigation={navigation}
-      />
-    );
+  list = [];
+  Object.keys(data.services).map(service => {
+    list = [...list, {...data.services[service], id: service}];
   });
 };
 
 const Service = ({navigation}) => {
   const data = useSelector(state => state.data);
-
+  generateServicesList(data);
   return (
     <View style={styles.container}>
       <>
@@ -35,7 +25,20 @@ const Service = ({navigation}) => {
           title="Dodaj serwis"
           onPress={() => navigation.navigate('AddService')}
         />
-        <View>{generateServicesList(data, navigation)}</View>
+        <FlatList
+          data={list}
+          renderItem={({item}) => (
+            <ServiceItem
+              mileage={item.mileage}
+              date={item.date}
+              amount={item.amount}
+              title={item.title}
+              description={item.description}
+              id={item.id}
+              navigation={navigation}
+            />
+          )}
+        />
       </>
     </View>
   );

@@ -17,7 +17,7 @@ import StatsMiniBox from '../components/StatsMiniBox';
 
 const Stats = () => {
   const refuellings = useSelector(state => state.data.refuellings);
-  console.log(refuellings);
+  // console.log(refuellings);
   const fuelPriceListLabels = [];
   const fuelPriceListValues = [];
   let avgFuelPriceSum = 0;
@@ -29,7 +29,6 @@ const Stats = () => {
   let minCompsumption = 99.9;
   let maxCompsumption = 0;
   let avgCompsumptionSum = 0;
-
   Object.keys(refuellings).map(refuelling => {
     fuelPriceListValues.push(Number(refuellings[refuelling].priceLiter));
     fuelPriceListLabels.push(refuellings[refuelling].date);
@@ -72,25 +71,33 @@ const Stats = () => {
           title="Wydatki na paliwo"
           data={fuelSumAmount}
           iconName="gas-station"
+          unit="zł"
         />
         <StatsMiniBox
           title="Wydatki na serwis"
-          data="850.54"
+          data="449.00"
           iconName="wrench"
+          unit="zł"
         />
       </View>
-      {/*<View style={styles.miniBoxContainer}>*/}
-      {/*  <StatsMiniBox*/}
-      {/*    title="Wydatki na paliwo"*/}
-      {/*    data={fuelSumAmount}*/}
-      {/*    iconName="gas-station"*/}
-      {/*  />*/}
-      {/*  <StatsMiniBox*/}
-      {/*    title="Wydatki na serwis"*/}
-      {/*    data="850.54"*/}
-      {/*    iconName="wrench"*/}
-      {/*  />*/}
-      {/*</View>*/}
+      <View style={styles.miniBoxContainer}>
+        <StatsMiniBox
+          title="Średni koszt przejechania kilometra"
+          data={(
+            ((avgCompsumptionSum / avgConsumptiomValues.length) *
+              (avgFuelPriceSum / fuelPriceListValues.length)) /
+            100
+          ).toFixed(2)}
+          iconName="cash-multiple"
+          unit="zł"
+        />
+        <StatsMiniBox
+          title="Dystans przejechany z aplikacją"
+          data={3943}
+          iconName="road-variant"
+          unit="km"
+        />
+      </View>
     </ScrollView>
   );
 };
