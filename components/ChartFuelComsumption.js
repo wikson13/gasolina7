@@ -9,7 +9,7 @@ const ChartFuelComsumption = ({title, values, labels, unit, min, max, avg}) => {
       <Text style={styles.title}>{title}</Text>
       <LineChart
         data={{
-          labels: labels,
+          // labels: labels,
           datasets: [
             {
               data: values,
@@ -20,6 +20,9 @@ const ChartFuelComsumption = ({title, values, labels, unit, min, max, avg}) => {
         height={220}
         // yAxisLabel="$"
         yAxisSuffix="l"
+        withDots={false}
+        withInnerLines={false}
+        withOuterLines={false}
         chartConfig={{
           backgroundColor: 'green',
           backgroundGradientFrom: '#fff',
@@ -32,7 +35,7 @@ const ChartFuelComsumption = ({title, values, labels, unit, min, max, avg}) => {
           },
           propsForDots: {
             r: '6',
-            strokeWidth: '2',
+            strokeWidth: '3',
             stroke: '#ffa726',
           },
         }}

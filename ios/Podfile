@@ -42,6 +42,9 @@ target 'gasolina7' do
 
   pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
 
+pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+
   target 'gasolina7Tests' do
     inherit! :search_paths
     # Pods for testing

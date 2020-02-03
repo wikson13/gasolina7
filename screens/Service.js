@@ -3,6 +3,8 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import ButtonClassic from '../components/ButtonClassic';
 import ServiceItem from '../components/ServiceItem';
 import {useSelector} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
+import colors from '../constants/colors';
 
 let list;
 const generateServicesList = data => {
@@ -21,6 +23,14 @@ const Service = ({navigation}) => {
   return (
     <View style={styles.container}>
       <>
+        {/*<LinearGradient*/}
+        {/*  colors={[colors.primaryColor, 'yellow']}*/}
+        {/*  start={{x: 0.0, y: 0.0}}*/}
+        {/*  end={{x: 1, y: 1}}*/}
+        {/*  style={styles.linearGradient}>*/}
+        {/*  <Text style={styles.buttonText}>Sign in with Facebook</Text>*/}
+        {/*</LinearGradient>*/}
+
         <ButtonClassic
           title="Dodaj serwis"
           onPress={() => navigation.navigate('AddService')}

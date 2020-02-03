@@ -6,7 +6,10 @@ import colors from '../constants/colors';
 
 const StatsMiniBox = ({title, data, iconName, unit}) => {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      style={styles.container}
+      colors={[colors.primaryColor, 'rgba(255,207,34,0.83)']}
+      start={{x: 0.0, y: 0.0}}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.icon}>
         <Icon name={iconName} size={30} color="#444" />
@@ -14,7 +17,7 @@ const StatsMiniBox = ({title, data, iconName, unit}) => {
       <Text style={styles.data}>
         {data} {unit}
       </Text>
-    </View>
+    </LinearGradient>
   );
 };
 

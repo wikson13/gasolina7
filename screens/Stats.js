@@ -14,6 +14,7 @@ import {useSelector} from 'react-redux';
 import ChartFuelComsumption from '../components/ChartFuelComsumption';
 import ChartFuelPrice from '../components/ChartFuelPrice';
 import StatsMiniBox from '../components/StatsMiniBox';
+import StatsMiniBox2 from '../components/StatsMiniBox2';
 
 const Stats = () => {
   const refuellings = useSelector(state => state.data.refuellings);

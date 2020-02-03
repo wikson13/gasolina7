@@ -34,23 +34,27 @@ const Fuel = ({navigation}) => {
             title="Dodaj tankowanie"
             onPress={() => navigation.navigate('AddRefuelling')}
           />
-          <FlatList
-            style={styles.listContainer}
-            data={list}
-            renderItem={({item}) => (
-              <RefuellingItem
-                mileage={item.mileage}
-                date={item.date}
-                amount={item.amount}
-                liters={item.liters}
-                avg={item.avg}
-                priceLiter={item.priceLiter}
-                fullRefuelling={item.fullRefuelling}
-                id={item.id}
-                navigation={navigation}
-              />
-            )}
-          />
+          {list ? (
+            <FlatList
+              style={styles.listContainer}
+              data={list}
+              renderItem={({item}) => (
+                <RefuellingItem
+                  mileage={item.mileage}
+                  date={item.date}
+                  amount={item.amount}
+                  liters={item.liters}
+                  avg={item.avg}
+                  priceLiter={item.priceLiter}
+                  fullRefuelling={item.fullRefuelling}
+                  id={item.id}
+                  navigation={navigation}
+                />
+              )}
+            />
+          ) : (
+            <Loading />
+          )}
         </>
       </View>
     </>
