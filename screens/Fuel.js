@@ -34,7 +34,6 @@ const Fuel = ({navigation}) => {
             title="Dodaj tankowanie"
             onPress={() => navigation.navigate('AddRefuelling')}
           />
-          {/*<View>{generateRefuellingsList(data, navigation)}</View>*/}
           <FlatList
             style={styles.listContainer}
             data={list}
@@ -60,15 +59,8 @@ const Fuel = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: 'red',
-  },
-  listContainer: {
-    marginBottom: 57,
+    flex: 1,
   },
 });
 
 export default Fuel;
-
-{
-  /*<RefuellingItem mileage={item.mileage} />*/
-}

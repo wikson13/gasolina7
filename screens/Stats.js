@@ -11,41 +11,82 @@ import {
 import colors from '../constants/colors';
 import ChartBox from '../components/ChartBox';
 import {useSelector} from 'react-redux';
+import ChartFuelComsumption from '../components/ChartFuelComsumption';
+import ChartFuelPrice from '../components/ChartFuelPrice';
+import StatsMiniBox from '../components/StatsMiniBox';
 
 const Stats = () => {
   const refuellings = useSelector(state => state.data.refuellings);
   console.log(refuellings);
   const fuelPriceListLabels = [];
   const fuelPriceListValues = [];
-  let refuellingsSumAmount = 0;
+  let avgFuelPriceSum = 0;
+  let fuelSumAmount = 0;
+  let serviceSumAmount = 0;
+
+  const avgConsumptiomLabels = [];
+  const avgConsumptiomValues = [];
+  let minCompsumption = 99.9;
+  let maxCompsumption = 0;
+  let avgCompsumptionSum = 0;
+
   Object.keys(refuellings).map(refuelling => {
-    fuelPriceListValues.push(refuellings[refuelling].priceLiter);
+    fuelPriceListValues.push(Number(refuellings[refuelling].priceLiter));
     fuelPriceListLabels.push(refuellings[refuelling].date);
-    refuellingsSumAmount += Number(refuellings[refuelling].amount);
+    avgFuelPriceSum += Number(refuellings[refuelling].priceLiter);
+    fuelSumAmount += Number(refuellings[refuelling].amount);
+    if (refuellings[refuelling].avg !== '-') {
+      avgConsumptiomValues.push(refuellings[refuelling].avg);
+      avgConsumptiomLabels.push(refuellings[refuelling].date);
+      if (refuellings[refuelling].avg < minCompsumption) {
+        minCompsumption = refuellings[refuelling].avg;
+      }
+      if (refuellings[refuelling].avg > maxCompsumption) {
+        maxCompsumption = refuellings[refuelling].avg;
+      }
+      avgCompsumptionSum += Number(refuellings[refuelling].avg);
+    }
   });
-  console.log(fuelPriceListValues);
-  console.log(fuelPriceListLabels);
-  console.log(refuellingsSumAmount);
 
   return (
     <ScrollView>
-      <ChartBox
+      <ChartFuelComsumption
+        title="Zużycie paliwa"
+        values={avgConsumptiomValues}
+        labels={avgConsumptiomLabels}
+        min={minCompsumption}
+        max={maxCompsumption}
+        avg={(avgCompsumptionSum / avgConsumptiomValues.length).toFixed(2)}
+      />
+
+      <ChartFuelPrice
         title="Cena paliwa"
         values={fuelPriceListValues}
         labels={fuelPriceListLabels}
+        min={Math.min(...fuelPriceListValues)}
+        max={Math.max(...fuelPriceListValues)}
+        avg={(avgFuelPriceSum / fuelPriceListValues.length).toFixed(2)}
       />
-      <ChartBox
-        title="Średnie spalanie"
-        values={fuelPriceListValues}
-        labels={fuelPriceListLabels}
-      />
+      <View style={styles.miniBoxContainer}>
+        <StatsMiniBox
+          title="Wydatki na paliwo"
+          data={fuelSumAmount}
+          iconName="gas-station"
+        />
+        <StatsMiniBox
+          title="Wydatki na serwis"
+          data="850.54"
+          iconName="wrench"
+        />
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  chartContainer: {
+  miniBoxContainer: {
     margin: (Dimensions.get('window').width * 0.05) / 2,
+    flexDirection: 'row',
   },
 });
 

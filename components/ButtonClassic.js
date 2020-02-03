@@ -3,12 +3,12 @@ import {Button, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import colors from '../constants/colors';
 import InputField from './InputField';
 
-const ButtonClassic = props => {
+const ButtonClassic = ({style, onPress, title}) => {
   return (
     <TouchableOpacity
-      style={{...styles.buttonClassic, ...props.style}}
-      onPress={props.onPress}>
-      <Text style={styles.text}>{props.title}</Text>
+      style={{...styles.buttonClassic, ...style}}
+      onPress={onPress}>
+      <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 };

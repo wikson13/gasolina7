@@ -5,7 +5,6 @@ const Loading = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size={60} color={colors.primaryColor} />
-      {/*<Text>Loading...</Text>*/}
     </View>
   );
 };

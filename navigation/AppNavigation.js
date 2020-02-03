@@ -27,13 +27,7 @@ const iconStyle = {
   size: 30,
   color: '#57606f',
 };
-//
-// const MainNavigation = createStackNavigator({
-//     Fuel: Fuel,
-//     Service: Service,
-//     Stats: Stats,
-//     AddRefuelling: AddRefuelling,
-// });
+
 const FuelNavigation = createStackNavigator({
   Fuel: Fuel,
   AddRefuelling: AddRefuelling,

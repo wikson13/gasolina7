@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import colors from '../constants/colors';
 
-const ChartBox = ({title, values, labels, unit, min, max, avg}) => {
+const ChartFuelPrice = ({title, values, labels, unit, min, max, avg}) => {
   return (
     <View style={styles.chartContainer}>
       <Text style={styles.title}>{title}</Text>
@@ -19,7 +19,7 @@ const ChartBox = ({title, values, labels, unit, min, max, avg}) => {
         width={Dimensions.get('window').width * 0.95} // from react-native
         height={220}
         // yAxisLabel="$"
-        yAxisSuffix={unit}
+        yAxisSuffix="zł"
         chartConfig={{
           backgroundColor: 'green',
           backgroundGradientFrom: '#fff',
@@ -47,12 +47,12 @@ const ChartBox = ({title, values, labels, unit, min, max, avg}) => {
           <Text style={styles.boxData}>{min}</Text>
         </View>
         <View style={styles.infoItem}>
-          <Text style={styles.boxTitle}>ŚREDNIE</Text>
-          <Text style={styles.boxData}>{max}</Text>
+          <Text style={styles.boxTitle}>ŚREDNIA</Text>
+          <Text style={styles.boxData}>{avg}</Text>
         </View>
         <View style={styles.infoItem}>
           <Text style={styles.boxTitle}>MAX</Text>
-          <Text style={styles.boxData}>{avg}</Text>
+          <Text style={styles.boxData}>{max}</Text>
         </View>
       </View>
     </View>
@@ -66,9 +66,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   title: {
-    fontSize: 23,
+    fontSize: 21,
     textAlign: 'center',
     marginVertical: 7,
+    fontFamily: 'Montserrat-Bold',
+    textTransform: 'uppercase',
   },
   infoContainer: {
     flexDirection: 'row',
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
   infoItem: {
     flex: 1,
     alignItems: 'center',
+    marginBottom: 5,
   },
   boxTitle: {
     fontFamily: 'Montserrat-Bold',
@@ -85,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChartBox;
+export default ChartFuelPrice;

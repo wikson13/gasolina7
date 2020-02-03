@@ -6,18 +6,25 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-const InputField = props => {
+const InputField = ({
+  value,
+  onChangeText,
+  keyboardType,
+  onFocus,
+  errorMsg,
+  title,
+}) => {
   return (
     <View style={styles.fieldContainer}>
-      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <TextInput
         style={styles.input}
-        value={props.value}
-        onChangeText={props.onChangeText}
-        keyboardType={props.keyboardType}
-        onFocus={props.onFocus}
+        value={value}
+        onChangeText={onChangeText}
+        keyboardType={keyboardType}
+        onFocus={onFocus}
       />
-      {props.errorMsg && <Text style={styles.errorMsg}>{props.errorMsg}</Text>}
+      {errorMsg && <Text style={styles.errorMsg}>{errorMsg}</Text>}
     </View>
   );
 };
