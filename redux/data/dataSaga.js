@@ -6,23 +6,21 @@ import {GET_DATA_REQUEST} from './dataActions';
 import {deleteRequest} from './dataActions';
 
 function calculateAvgConsumption(data) {
-  console.log(data);
   let refuellingList = [];
   Object.keys(data.refuellings).map(refuelling => {
-    refuellingList.push(data.refuellings[refuelling]);
+    refuellingList.push({...data.refuellings[refuelling], id: refuelling});
   });
-  console.log(refuellingList);
 
   //CALC AVG FUEL CONSUMPTION
   let refuellingfArray = [];
-  let refuellingfArray2 = [];
-  console.log(refuellingList);
+  let refuellingfArray2 = {};
   refuellingList.reverse().forEach((refuelling, index) => {
     let kmsLastRef = null;
     let kmsLastFullRef = null;
     let refueledLiters = 0;
     let avgFuelConsumption = '-';
     let loopCounter = 1;
+
     let loopActive = true;
 
     if (refuellingList.length === index + 1) {
@@ -80,9 +78,9 @@ function calculateAvgConsumption(data) {
       avgFuelConsumption = refuellingfArray[index - 1];
     }
 
-    refuellingfArray2 = [
+    refuellingfArray2 = {
       ...refuellingfArray2,
-      {
+      [refuelling.id]: {
         avg: refuellingfArray[index],
         fullRefuelling: refuelling.fullRefuelling,
         date: refuelling.date,
@@ -91,21 +89,9 @@ function calculateAvgConsumption(data) {
         mileage: refuelling.mileage,
         priceLiter: refuelling.priceLiter,
       },
-    ];
-
-    // refuellingfArray2.push({
-    //   avg: refuellingfArray[index],
-    //   fullRefuelling: refuelling.fullRefuelling,
-    //   date: refuelling.date,
-    //   amount: refuelling.amount,
-    //   liters: refuelling.liters,
-    //   mileage: refuelling.mileage,
-    //   priceLiter: refuelling.priceLiter,
-    // });
-
-    console.log(refuellingfArray2);
-    return refuellingfArray2;
+    };
   });
+  return {refuellings: {...refuellingfArray2}, services: {...data.services}};
 }
 
 function* getData(action) {
@@ -115,10 +101,10 @@ function* getData(action) {
         action.payload.userEmail
       }/.json`,
     );
-    // yield call(calculateAvgConsumption(result.data));
+    const list = calculateAvgConsumption(result.data);
     yield put(
       actions.getDataSuccess({
-        data: calculateAvgConsumption(result.data),
+        data: list,
       }),
     );
   } catch (e) {

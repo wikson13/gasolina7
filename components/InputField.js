@@ -25,6 +25,7 @@ const InputField = props => {
 const styles = StyleSheet.create({
   title: {
     fontSize: 15,
+    fontFamily: 'Montserrat-Medium',
   },
   input: {
     borderBottomWidth: 1,
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     fontSize: 12,
+    fontFamily: 'Montserrat-Medium',
   },
 });
 

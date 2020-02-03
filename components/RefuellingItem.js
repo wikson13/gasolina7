@@ -51,7 +51,12 @@ const RefuellingItem = props => {
     <>
       <View style={styles.refuellingItem}>
         <View style={styles.consumptionBox}>
-          <Text style={styles.consumption}>7.83</Text>
+          <Text
+            style={
+              props.fullRefuelling ? styles.consumptionFull : styles.consumption
+            }>
+            {props.avg}
+          </Text>
           <Text style={styles.unit}>l/100km</Text>
         </View>
         <View style={styles.data}>
@@ -147,10 +152,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryColor,
     padding: 3,
     textAlign: 'center',
+    width: 65,
   },
   consumption: {
     fontSize: 25,
     textAlign: 'center',
+    color: 'rgb(171, 142, 54)',
+    fontFamily: 'Montserrat-Bold',
+  },
+  consumptionFull: {
+    fontSize: 25,
+    textAlign: 'center',
+    fontFamily: 'Montserrat-Bold',
   },
   unit: {
     fontSize: 8,
@@ -174,6 +187,7 @@ const styles = StyleSheet.create({
     color: '#7f8897',
     fontSize: 15,
     marginLeft: 2,
+    fontFamily: 'Montserrat-Medium',
   },
   valueBox: {
     flexDirection: 'row',

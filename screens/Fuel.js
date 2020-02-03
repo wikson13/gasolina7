@@ -16,6 +16,7 @@ const generateRefuellingsList = (data, navigation) => {
     return null;
   }
   return Object.keys(data.refuellings).map(refuelling => {
+    // return Object.keys(data.refuellings).map(refuelling => {
     return (
       <RefuellingItem
         key={refuelling}
@@ -25,9 +26,21 @@ const generateRefuellingsList = (data, navigation) => {
         liters={data.refuellings[refuelling].liters}
         priceLiter={data.refuellings[refuelling].priceLiter}
         fullRefuelling={data.refuellings[refuelling].fullRefuelling}
+        avg={data.refuellings[refuelling].avg}
         id={refuelling}
         navigation={navigation}
       />
+      //     <RefuellingItem
+      // key={refuelling}
+      // date={data.refuellings[refuelling].date}
+      // mileage={data.refuellings[refuelling].mileage}
+      // amount={data.refuellings[refuelling].amount}
+      // liters={data.refuellings[refuelling].liters}
+      // priceLiter={data.refuellings[refuelling].priceLiter}
+      // fullRefuelling={data.refuellings[refuelling].fullRefuelling}
+      // id={refuelling}
+      // navigation={navigation}
+      // />
     );
   });
 };
