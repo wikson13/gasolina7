@@ -79,13 +79,26 @@ const Stats = () => {
           iconName="wrench"
         />
       </View>
+      {/*<View style={styles.miniBoxContainer}>*/}
+      {/*  <StatsMiniBox*/}
+      {/*    title="Wydatki na paliwo"*/}
+      {/*    data={fuelSumAmount}*/}
+      {/*    iconName="gas-station"*/}
+      {/*  />*/}
+      {/*  <StatsMiniBox*/}
+      {/*    title="Wydatki na serwis"*/}
+      {/*    data="850.54"*/}
+      {/*    iconName="wrench"*/}
+      {/*  />*/}
+      {/*</View>*/}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   miniBoxContainer: {
-    margin: (Dimensions.get('window').width * 0.05) / 2,
+    marginHorizontal: (Dimensions.get('window').width * 0.05) / 2,
+    marginBottom: 0,
     flexDirection: 'row',
   },
 });

@@ -14,7 +14,28 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as dataActions from '../redux/data/dataActions';
 import ButtonClassic from './ButtonClassic';
 import {useDispatch, useSelector} from 'react-redux';
-
+import Svg, {
+  Circle,
+  Ellipse,
+  G,
+  TSpan,
+  TextPath,
+  Path,
+  Polygon,
+  Polyline,
+  Line,
+  Rect,
+  Use,
+  Image,
+  Symbol,
+  Defs,
+  LinearGradient,
+  RadialGradient,
+  Stop,
+  ClipPath,
+  Pattern,
+  Mask,
+} from 'react-native-svg';
 const RefuellingItem = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
@@ -50,15 +71,35 @@ const RefuellingItem = props => {
   return (
     <>
       <View style={styles.refuellingItem}>
-        <View style={styles.consumptionBox}>
-          <Text
-            style={
-              props.fullRefuelling ? styles.consumptionFull : styles.consumption
-            }>
-            {props.avg}
-          </Text>
-          <Text style={styles.unit}>l/100km</Text>
-        </View>
+        {/*<View style={styles.consumptionBox}>*/}
+        {/*  <Text*/}
+        {/*    style={*/}
+        {/*      props.fullRefuelling ? styles.consumptionFull : styles.consumption*/}
+        {/*    }>*/}
+        {/*    {props.avg}*/}
+        {/*  </Text>*/}
+        {/*  <Text style={styles.unit}>l/100km</Text>*/}
+        {/*</View>*/}
+
+        <Svg height="53" width="80">
+          <Polygon
+            points="0,0 80,0 65,53 0,100 "
+            fill={colors.primaryColor}
+            strokeWidth="1"
+            style={styles.polygon}
+          />
+          <View style={styles.consumptionBox}>
+            <Text
+              style={
+                props.fullRefuelling
+                  ? styles.consumptionFull
+                  : styles.consumption
+              }>
+              {props.avg}
+            </Text>
+            <Text style={styles.unit}>l/100km</Text>
+          </View>
+        </Svg>
         <View style={styles.data}>
           <View style={styles.column}>
             <View style={styles.valueBox}>
@@ -100,8 +141,22 @@ const RefuellingItem = props => {
         <TouchableOpacity
           style={styles.infoButton}
           onPress={() => setModalVisible(true)}>
-          <Icon name="information-outline" size={30} color="#000" />
+          <Svg height="53" width="40">
+            <Polygon
+              points="15,0 40,0 40,53 0,53 "
+              fill={colors.primaryColor}
+              strokeWidth="1"
+            />
+            <View style={styles.infoIcon}>
+              <Icon name="information-variant" size={30} color="#000" />
+            </View>
+          </Svg>
         </TouchableOpacity>
+        {/*<TouchableOpacity*/}
+        {/*  style={styles.infoButton}*/}
+        {/*  onPress={() => setModalVisible(true)}>*/}
+        {/*  <Icon name="information-outline" size={30} color="#000" />*/}
+        {/*</TouchableOpacity>*/}
       </View>
 
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
@@ -112,7 +167,7 @@ const RefuellingItem = props => {
             <View style={styles.header}>
               <Text>Tankowanie {props.date}</Text>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Icon name="close" size={30} color="#000" />
+                <Icon name="close" size={25} color="#000" />
               </TouchableOpacity>
             </View>
             <View>
@@ -149,10 +204,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   consumptionBox: {
-    backgroundColor: colors.primaryColor,
-    padding: 3,
+    // backgroundColor: colors.primaryColor,
+    paddingTop: 7,
+    marginLeft: 2,
     textAlign: 'center',
     width: 65,
+    justifyContent: 'center',
   },
   consumption: {
     fontSize: 25,
@@ -173,15 +230,25 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 4,
+    paddingVertical: 2,
+    // backgroundColor: 'red',
   },
   column: {
     flex: 1,
     justifyContent: 'space-between',
   },
   infoButton: {
-    backgroundColor: colors.primaryColor,
-    padding: 10,
+    // backgroundColor: colors.primaryColor,
+    // padding: 10,
+  },
+  infoIcon: {
+    // backgroundColor: 'red',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: '100%',
+    // flex: 1,
+    // justifyContent: 'flex-end',
   },
   value: {
     color: '#7f8897',
@@ -217,6 +284,9 @@ const styles = StyleSheet.create({
   buttonDelete: {
     flex: 1,
     backgroundColor: '#e74c3c',
+  },
+  polygon: {
+    justifyContent: 'center',
   },
 });
 
