@@ -15,12 +15,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import * as dataActions from '../redux/data/dataActions';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
+import SwitchField from '../components/SwitchField';
 
 const AddRefuelling = props => {
   let editRefuelling = null;
   if (props.navigation.state.params) {
     editRefuelling = props.navigation.state.params;
-    console.log(editRefuelling);
   }
   const [mileage, setMileage] = useState(
     editRefuelling === null ? '' : editRefuelling.mileage,
@@ -141,8 +141,8 @@ const AddRefuelling = props => {
           keyboardType="number-pad"
         />
 
-        <Text>Tankowanie do pełna</Text>
-        <Switch
+        <SwitchField
+          title="Tankowanie do pełna"
           value={fullRefuelling}
           onValueChange={() => setFullRefuelling(!fullRefuelling)}
         />

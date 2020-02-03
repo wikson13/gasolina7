@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#959595',
     padding: 0,
+    fontFamily: 'Montserrat-Light',
   },
   fieldContainer: {
     margin: 10,
