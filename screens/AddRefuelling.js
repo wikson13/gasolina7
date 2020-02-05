@@ -4,6 +4,7 @@ import {
   Button,
   Text,
   TextInput,
+  Alert,
   Switch,
   Keyboard,
   ScrollView,
@@ -16,6 +17,8 @@ import * as dataActions from '../redux/data/dataActions';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 import SwitchField from '../components/SwitchField';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
 const todayDate = moment(new Date()).format('DD.MM.YYYY');
 // const todayDate = new Date();
 const AddRefuelling = props => {
@@ -79,19 +82,6 @@ const AddRefuelling = props => {
     setMileage(text);
   };
 
-  const dateInputHandler = () => {
-    setShowDatepicker(true);
-    Keyboard.dismiss();
-  };
-
-  const dateChangeHandler = (event, date) => {
-    setShowDatepicker(false);
-    const formatedDate = moment(date).format('DD.MM.YYYY');
-
-    setDate(formatedDate);
-    // Keyboard.dismiss();
-  };
-
   const litersInputHandler = text => {
     if (text.trim().length <= 0) {
       setLitersErr('To pole jest wymagane');
@@ -103,10 +93,20 @@ const AddRefuelling = props => {
     setLiters(text);
   };
 
+  const handleDatapickerConfirm = date => {
+    setShowDatepicker(false);
+
+    const formatedDate = moment(date).format('DD.MM.YYYY');
+    console.log(date);
+    console.log(formatedDate);
+    setDate(formatedDate);
+    setShowDatepicker(false);
+  };
+
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={15}
-      behavior="marginrr"
+      behavior="margin"
       style={{flex: 1}}>
       <ScrollView>
         <InputField
@@ -154,12 +154,11 @@ const AddRefuelling = props => {
           onPress={addRefuellingButtonHandler}
         />
         {showDatepicker && (
-          <DateTimePicker
-            value={new Date()}
-            mode={'date'}
-            is24Hour={true}
-            display="default"
-            onChange={(event, date) => dateChangeHandler(event, date)}
+          <DateTimePickerModal
+            isVisible={showDatepicker}
+            mode="date"
+            onConfirm={handleDatapickerConfirm}
+            onCancel={() => setShowDatepicker(false)}
           />
         )}
       </ScrollView>
