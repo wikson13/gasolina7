@@ -63,11 +63,25 @@ const RefuellingItem = props => {
     setModalVisible(false);
   };
 
+  const generateAvgNumber = val => {
+    if (val === '-') {
+      return val;
+    }
+    value = Number(val);
+    if (value >= 100) {
+      return value.toFixed(0);
+    }
+    if (value >= 10) {
+      return value.toFixed(1);
+    }
+
+    return value.toFixed(2);
+  };
+
   const iconStyle = {
     size: 20,
     color: '#97a0af',
   };
-
   return (
     <>
       <View style={styles.refuellingItem}>
@@ -95,7 +109,7 @@ const RefuellingItem = props => {
                   ? styles.consumptionFull
                   : styles.consumption
               }>
-              {props.avg}
+              {generateAvgNumber(props.avg)}
             </Text>
             <Text style={styles.unit}>l/100km</Text>
           </View>
@@ -126,7 +140,9 @@ const RefuellingItem = props => {
                 size={iconStyle.size}
                 color={iconStyle.color}
               />
-              <Text style={styles.value}>{props.amount}</Text>
+              <Text style={styles.value}>
+                {Number(props.amount).toFixed(2)}
+              </Text>
             </View>
             <View style={styles.valueBox}>
               <Icon
@@ -134,7 +150,9 @@ const RefuellingItem = props => {
                 size={iconStyle.size}
                 color={iconStyle.color}
               />
-              <Text style={styles.value}>{props.liters}</Text>
+              <Text style={styles.value}>
+                {Number(props.liters).toFixed(2)}
+              </Text>
             </View>
           </View>
         </View>
@@ -152,11 +170,6 @@ const RefuellingItem = props => {
             </View>
           </Svg>
         </TouchableOpacity>
-        {/*<TouchableOpacity*/}
-        {/*  style={styles.infoButton}*/}
-        {/*  onPress={() => setModalVisible(true)}>*/}
-        {/*  <Icon name="information-outline" size={30} color="#000" />*/}
-        {/*</TouchableOpacity>*/}
       </View>
 
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
@@ -165,15 +178,26 @@ const RefuellingItem = props => {
           onPress={() => setModalVisible(!modalVisible)}>
           <View style={styles.modal}>
             <View style={styles.header}>
-              <Text>Tankowanie {props.date}</Text>
+              <Text style={styles.title}>Tankowanie {props.date}</Text>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <Icon name="close" size={25} color="#000" />
               </TouchableOpacity>
             </View>
             <View>
+              <Text>Od ostatniego tankowania: {props.kmsLastRef}km</Text>
+              <Text>
+                Od ostatniego pełnego tankowania: {props.kmsLastFullRef}km
+              </Text>
               <Text>Przebieg: {props.mileage}</Text>
-              <Text>Zatankowano: {props.liters}</Text>
-              <Text>Zapłacono: {props.amount}</Text>
+              <Text>Zatankowano: {props.liters}l</Text>
+              <Text>Zapłacono: {props.amount}zł</Text>
+              <Text>Cena paliwa: {props.priceLiter}zł/l</Text>
+              <Text>
+                Tankowanie do pełna: {props.fullRefuelling ? 'TAK' : 'NIE'}
+              </Text>
+              <Text>
+                Średnie spalanie od ostatniego pełnego tankowania: {props.avg}l
+              </Text>
             </View>
             <View style={styles.buttonsContainer}>
               <ButtonClassic
@@ -287,6 +311,9 @@ const styles = StyleSheet.create({
   },
   polygon: {
     justifyContent: 'center',
+  },
+  title: {
+    fontFamily: 'Montserrat-Bold',
   },
 });
 

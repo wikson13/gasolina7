@@ -81,6 +81,8 @@ const calculateAvgConsumption = data => {
         liters: refuelling.liters,
         mileage: refuelling.mileage,
         priceLiter: refuelling.priceLiter,
+        kmsLastFullRef,
+        kmsLastRef,
       },
     };
   });

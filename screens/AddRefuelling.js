@@ -16,7 +16,8 @@ import * as dataActions from '../redux/data/dataActions';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 import SwitchField from '../components/SwitchField';
-
+const todayDate = moment(new Date()).format('DD.MM.YYYY');
+// const todayDate = new Date();
 const AddRefuelling = props => {
   let editRefuelling = null;
   if (props.navigation.state.params) {
@@ -26,7 +27,7 @@ const AddRefuelling = props => {
     editRefuelling === null ? '' : editRefuelling.mileage,
   );
   const [date, setDate] = useState(
-    editRefuelling === null ? '' : editRefuelling.date,
+    editRefuelling === null ? todayDate : editRefuelling.date,
   );
   const [liters, setLiters] = useState(
     editRefuelling === null ? '' : editRefuelling.liters,
@@ -85,10 +86,10 @@ const AddRefuelling = props => {
 
   const dateChangeHandler = (event, date) => {
     setShowDatepicker(false);
-
     const formatedDate = moment(date).format('DD.MM.YYYY');
+
     setDate(formatedDate);
-    Keyboard.dismiss();
+    // Keyboard.dismiss();
   };
 
   const litersInputHandler = text => {
@@ -158,7 +159,7 @@ const AddRefuelling = props => {
             mode={'date'}
             is24Hour={true}
             display="default"
-            onChange={dateChangeHandler}
+            onChange={(event, date) => dateChangeHandler(event, date)}
           />
         )}
       </ScrollView>

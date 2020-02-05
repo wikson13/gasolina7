@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, StyleSheet, View, Text} from 'react-native';
+import {Dimensions, StyleSheet, View, Text, Alert} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import colors from '../constants/colors';
 
@@ -20,9 +20,12 @@ const ChartFuelComsumption = ({title, values, labels, unit, min, max, avg}) => {
         height={220}
         // yAxisLabel="$"
         yAxisSuffix="l"
-        withDots={false}
+        withDots={true}
         withInnerLines={false}
         withOuterLines={false}
+        onDataPointClick={(value, dataset) =>
+          Alert.alert(value.value + ' l/100km', labels[value.index])
+        }
         chartConfig={{
           backgroundColor: 'green',
           backgroundGradientFrom: '#fff',
@@ -34,8 +37,8 @@ const ChartFuelComsumption = ({title, values, labels, unit, min, max, avg}) => {
             borderRadius: 16,
           },
           propsForDots: {
-            r: '6',
-            strokeWidth: '3',
+            r: '5',
+            strokeWidth: '0',
             stroke: '#ffa726',
           },
         }}
