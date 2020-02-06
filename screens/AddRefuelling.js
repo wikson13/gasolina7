@@ -50,6 +50,7 @@ const AddRefuelling = props => {
 
   const [mileageErr, setMileageErr] = useState(null);
   const [litersErr, setLitersErr] = useState(null);
+  const [priceLiterErr, setPriceLiterErr] = useState(null);
 
   const dispatch = useDispatch();
   const userEmail = useSelector(state => state.auth.userEmail);
@@ -71,34 +72,46 @@ const AddRefuelling = props => {
     props.navigation.navigate('Fuel');
   };
 
-  const mileageInputHandler = text => {
-    if (text.trim().length <= 0) {
+  const mileageInputHandler = value => {
+    if (value.trim().length <= 0) {
       setMileageErr('To pole jest wymagane');
     } else if (!/^\d+$/.test(text)) {
       setMileageErr('Wpisano nieprawidłową wartość');
     } else {
       setMileageErr(null);
     }
-    setMileage(text);
+    setMileage(value);
   };
 
-  const litersInputHandler = text => {
-    if (text.trim().length <= 0) {
+  const litersInputHandler = value => {
+    if (value.trim().length <= 0) {
       setLitersErr('To pole jest wymagane');
-    } else if (!/^[+]?([0-9]{1,4})[.,]{0,1}([0-9]{0,3})?$/.test(text)) {
+    } else if (!/^[+]?([0-9]{1,4})[.,]{0,1}([0-9]{0,3})?$/.test(value)) {
       setLitersErr('Wpisano nieprawidłową wartość');
     } else {
       setLitersErr(null);
     }
-    setLiters(text);
+    setLiters(value);
+  };
+
+  const PriceLiterInputHandler = value => {
+    if (value.trim().length <= 0) {
+      setPriceLiterErr('To pole jest wymagane');
+    } else if (!/^[+]?([0-9]{1,3})[.,]{0,1}([0-9]{0,3})?$/.test(value)) {
+      setPriceLiterErr('Wpisano nieprawidłową wartość');
+    } else {
+      setPriceLiterErr(null);
+    }
+
+    setPriceLiter(value);
   };
 
   const handleDatapickerConfirm = date => {
     setShowDatepicker(false);
 
     const formatedDate = moment(date).format('DD.MM.YYYY');
-    console.log(date);
-    console.log(formatedDate);
+    console.log(showDatepicker);
+    console.log('aaa');
     setDate(formatedDate);
     setShowDatepicker(false);
   };
@@ -112,28 +125,29 @@ const AddRefuelling = props => {
         <InputField
           title="Przebieg"
           value={mileage}
-          onChangeText={text => mileageInputHandler(text)}
+          onChangeText={value => mileageInputHandler(value)}
           keyboardType="number-pad"
           errorMsg={mileageErr}
         />
         <InputField
           title="Data"
           value={date}
-          onChangeText={text => setDate(text)}
+          onChangeText={value => setDate(value)}
           onFocus={() => setShowDatepicker(true)}
         />
         <InputField
           title="Zatankowano"
           value={liters}
-          onChangeText={text => litersInputHandler(text)}
+          onChangeText={value => litersInputHandler(value)}
           keyboardType="number-pad"
           errorMsg={litersErr}
         />
         <InputField
           title="Cena za litr"
           value={priceLiter}
-          onChangeText={text => setPriceLiter(text)}
+          onChangeText={text => PriceLiterInputHandler(text)}
           keyboardType="number-pad"
+          errorMsg={priceLiterErr}
         />
         <InputField
           title="Zapłacono"
@@ -157,6 +171,10 @@ const AddRefuelling = props => {
           <DateTimePickerModal
             isVisible={showDatepicker}
             mode="date"
+            locale="pl_PL"
+            cancelTextIOS="Anuluj"
+            confirmTextIOS="Potwierdź"
+            headerTextIOS="Wybierz datę"
             onConfirm={handleDatapickerConfirm}
             onCancel={() => setShowDatepicker(false)}
           />

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, StyleSheet, View, Text} from 'react-native';
+import {Dimensions, StyleSheet, View, Text, Alert} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import colors from '../constants/colors';
 
@@ -9,7 +9,7 @@ const ChartFuelPrice = ({title, values, labels, unit, min, max, avg}) => {
       <Text style={styles.title}>{title}</Text>
       <LineChart
         data={{
-          labels: labels,
+          // labels: labels,
           datasets: [
             {
               data: values,
@@ -20,6 +20,12 @@ const ChartFuelPrice = ({title, values, labels, unit, min, max, avg}) => {
         height={220}
         // yAxisLabel="$"
         yAxisSuffix="zł"
+        withDots={true}
+        withInnerLines={false}
+        withOuterLines={false}
+        onDataPointClick={(value, dataset) =>
+          Alert.alert(value.value + ' zł/l', labels[value.index])
+        }
         chartConfig={{
           backgroundColor: 'green',
           backgroundGradientFrom: '#fff',
@@ -31,8 +37,8 @@ const ChartFuelPrice = ({title, values, labels, unit, min, max, avg}) => {
             borderRadius: 16,
           },
           propsForDots: {
-            r: '6',
-            strokeWidth: '2',
+            r: '5',
+            strokeWidth: '0',
             stroke: '#ffa726',
           },
         }}
