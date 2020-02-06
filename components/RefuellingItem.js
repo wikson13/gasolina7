@@ -36,6 +36,8 @@ import Svg, {
   Pattern,
   Mask,
 } from 'react-native-svg';
+import Swipeable from 'react-native-swipeable-row';
+
 const RefuellingItem = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
@@ -82,95 +84,112 @@ const RefuellingItem = props => {
     size: 20,
     color: '#97a0af',
   };
+
+  const rightButtons = [
+    <TouchableHighlight
+      style={styles.editButton}
+      onPress={() => editButtonHandler()}>
+      <Icon name="pencil" size={30} color="#fff" style={{marginLeft: 20}} />
+    </TouchableHighlight>,
+    <TouchableHighlight
+      style={styles.deleteButton}
+      onPress={deleteButtonHandler}>
+      <Icon name="delete" size={30} color="#fff" style={{marginLeft: 20}} />
+    </TouchableHighlight>,
+  ];
+  const leftContent = <Text>Pull to activate</Text>;
+
   return (
     <>
-      <View style={styles.refuellingItem}>
-        {/*<View style={styles.consumptionBox}>*/}
-        {/*  <Text*/}
-        {/*    style={*/}
-        {/*      props.fullRefuelling ? styles.consumptionFull : styles.consumption*/}
-        {/*    }>*/}
-        {/*    {props.avg}*/}
-        {/*  </Text>*/}
-        {/*  <Text style={styles.unit}>l/100km</Text>*/}
-        {/*</View>*/}
+      <Swipeable leftContent={leftContent} rightButtons={rightButtons}>
+        <View style={styles.refuellingItem}>
+          {/*<View style={styles.consumptionBox}>*/}
+          {/*  <Text*/}
+          {/*    style={*/}
+          {/*      props.fullRefuelling ? styles.consumptionFull : styles.consumption*/}
+          {/*    }>*/}
+          {/*    {props.avg}*/}
+          {/*  </Text>*/}
+          {/*  <Text style={styles.unit}>l/100km</Text>*/}
+          {/*</View>*/}
 
-        <Svg height="53" width="80">
-          <Polygon
-            points="0,0 80,0 65,53 0,100 "
-            fill={colors.primaryColor}
-            strokeWidth="1"
-            style={styles.polygon}
-          />
-          <View style={styles.consumptionBox}>
-            <Text
-              style={
-                props.fullRefuelling
-                  ? styles.consumptionFull
-                  : styles.consumption
-              }>
-              {generateAvgNumber(props.avg)}
-            </Text>
-            <Text style={styles.unit}>l/100km</Text>
-          </View>
-        </Svg>
-        <View style={styles.data}>
-          <View style={styles.column}>
-            <View style={styles.valueBox}>
-              <Icon
-                name="calendar-today"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>{props.date}</Text>
-            </View>
-            <View style={styles.valueBox}>
-              <Icon
-                name="speedometer"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>{props.mileage}</Text>
-            </View>
-          </View>
-          <View style={styles.column}>
-            <View style={styles.valueBox}>
-              <Icon
-                name="credit-card"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>
-                {Number(props.amount).toFixed(2)}
-              </Text>
-            </View>
-            <View style={styles.valueBox}>
-              <Icon
-                name="gas-station"
-                size={iconStyle.size}
-                color={iconStyle.color}
-              />
-              <Text style={styles.value}>
-                {Number(props.liters).toFixed(2)}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <TouchableOpacity
-          style={styles.infoButton}
-          onPress={() => setModalVisible(true)}>
-          <Svg height="53" width="40">
+          <Svg height="53" width="80">
             <Polygon
-              points="15,0 40,0 40,53 0,53 "
+              points="0,0 80,0 65,53 0,100 "
               fill={colors.primaryColor}
               strokeWidth="1"
+              style={styles.polygon}
             />
-            <View style={styles.infoIcon}>
-              <Icon name="information-variant" size={30} color="#000" />
+            <View style={styles.consumptionBox}>
+              <Text
+                style={
+                  props.fullRefuelling
+                    ? styles.consumptionFull
+                    : styles.consumption
+                }>
+                {generateAvgNumber(props.avg)}
+              </Text>
+              <Text style={styles.unit}>l/100km</Text>
             </View>
           </Svg>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.data}>
+            <View style={styles.column}>
+              <View style={styles.valueBox}>
+                <Icon
+                  name="calendar-today"
+                  size={iconStyle.size}
+                  color={iconStyle.color}
+                />
+                <Text style={styles.value}>{props.date}</Text>
+              </View>
+              <View style={styles.valueBox}>
+                <Icon
+                  name="speedometer"
+                  size={iconStyle.size}
+                  color={iconStyle.color}
+                />
+                <Text style={styles.value}>{props.mileage}</Text>
+              </View>
+            </View>
+            <View style={styles.column}>
+              <View style={styles.valueBox}>
+                <Icon
+                  name="credit-card"
+                  size={iconStyle.size}
+                  color={iconStyle.color}
+                />
+                <Text style={styles.value}>
+                  {Number(props.amount).toFixed(2)}
+                </Text>
+              </View>
+              <View style={styles.valueBox}>
+                <Icon
+                  name="gas-station"
+                  size={iconStyle.size}
+                  color={iconStyle.color}
+                />
+                <Text style={styles.value}>
+                  {Number(props.liters).toFixed(2)}
+                </Text>
+              </View>
+            </View>
+          </View>
+          <TouchableOpacity
+            style={styles.infoButton}
+            onPress={() => setModalVisible(true)}>
+            <Svg height="53" width="40">
+              <Polygon
+                points="15,0 40,0 40,53 0,53 "
+                fill={colors.primaryColor}
+                strokeWidth="1"
+              />
+              <View style={styles.infoIcon}>
+                <Icon name="information-variant" size={30} color="#000" />
+              </View>
+            </Svg>
+          </TouchableOpacity>
+        </View>
+      </Swipeable>
 
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
         <TouchableHighlight
@@ -314,6 +333,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'Montserrat-Bold',
+  },
+  editButton: {
+    backgroundColor: '#0984e3',
+    flex: 1,
+    justifyContent: 'center',
+    marginVertical: 5,
+  },
+  deleteButton: {
+    backgroundColor: '#e74c3c',
+    flex: 1,
+    justifyContent: 'center',
+    marginVertical: 5,
   },
 });
 
